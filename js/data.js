@@ -26,7 +26,7 @@ const NAMES = [
 ]
 
 //# небоходимое количество объектов
-const OBJECTS_NUMBER = 25;
+const PICTURES_NUMBER = 25;
 
 
 //@ функция, создающия случайный комментарий
@@ -41,7 +41,7 @@ const createCommment = () => {
 
 
 //@ функция, создающая объект
-const createObject = () => {
+const createPicture = () => {
 
 	let generatedId = generateId();
 
@@ -55,7 +55,6 @@ const createObject = () => {
 }
 
 //# создание результирующего массива
-const resultArray = Array.from({ length: OBJECTS_NUMBER }, createObject);
+const createPictures = () => Array.from({ length: PICTURES_NUMBER }, createPicture);
 
-// eslint-disable-next-line no-console
-console.log(resultArray);
+export { createPictures }
