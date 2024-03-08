@@ -21,7 +21,10 @@ const createIdGenerator = () => {
 	}
 }
 
-//@  функция-генератор идентификаторов
+//@ функция-генератор идентификаторов
 const generateId = createIdGenerator();
 
-export { getRandPosInt, getRandomElement, generateId };
+//@ функция, проверяющая, что нажатая клавиша - ESC
+const isEscKey = (evt) => evt.key === 'Escape'
+
+export { getRandPosInt, getRandomElement, generateId, isEscKey };
