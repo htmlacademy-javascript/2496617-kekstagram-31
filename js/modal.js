@@ -5,8 +5,8 @@ const picturesContainerNode = document.querySelector('.pictures');
 const modalNode = document.querySelector('.big-picture');
 const closeBtnNode = modalNode.querySelector('.big-picture__cancel');
 
-const commentsCountNode = modalNode.querySelector('.social__comment-count');
-const commentsLoaderNode = modalNode.querySelector('.comments-loader');
+// const commentsCountNode = modalNode.querySelector('.social__comment-count');
+// const commentsLoaderNode = modalNode.querySelector('.comments-loader');
 
 
 //# обработчик открывает модальное окно при клике на контейнер с картинками
@@ -39,9 +39,6 @@ const openModal = () => {
 
 	closeBtnNode.addEventListener('click', onCloseBtnNodeClick);
 	document.addEventListener('keydown', onEscKeydown);
-
-	commentsCountNode.classList.add('hidden');
-	commentsLoaderNode.classList.add('hidden');
 
 	document.body.classList.add('modal-open');
 }

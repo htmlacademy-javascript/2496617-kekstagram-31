@@ -902,6 +902,10 @@ main {
  * Комментарии к изображению
  */
 
+[hidden] {
+    display: none !important;
+}
+
 .social__comments {
     -ms-flex-preferred-size: 100%;
     flex-basis: 100%;

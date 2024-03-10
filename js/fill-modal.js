@@ -24,15 +24,13 @@ const createComment = (src, name, message) => {
 const fillModal = (modalNode, clickedPicture) => {
 
 	//# блок количества комментариев
-	const commentsCountNode = modalNode.querySelector('.social__comment-count');
+	const shownComentsNode = modalNode.querySelector('.social__comment-shown-count');
+	const totalCommentsNode = modalNode.querySelector('.social__comment-total-count');
 
 	//# блок списка комментариев
 	const modalCommentsContainerNode = modalNode.querySelector('.social__comments');
 
-	const shownComentsNode = commentsCountNode.querySelector('.social__comment-shown-count');
-	const totalComentsNode = commentsCountNode.querySelector('.social__comment-total-count');
-
-	//# перебор массива ----- деструктуризация элемента массива
+	//# перебор массива фотографий
 	picturesArray.forEach(({ id, url, likes, comments, description }) => {
 
 		//# проверка, что id в объекте-фотографии соответствует номеру нажатой миниатюры
@@ -41,12 +39,7 @@ const fillModal = (modalNode, clickedPicture) => {
 			//# заполнение модального окна соответствующими данными
 			modalNode.querySelector('.big-picture__img img').src = url;
 			modalNode.querySelector('.likes-count').textContent = likes;
-			totalComentsNode.textContent = comments.length;
-
-			//# корректировка числа показываемых комментариев
-			if (totalComentsNode.textContent <= 5) {
-				shownComentsNode.textContent = totalComentsNode.textContent;
-			}
+			totalCommentsNode.textContent = comments.length;
 
 			modalNode.querySelector('.social__caption').textContent = description;
 
@@ -57,9 +50,54 @@ const fillModal = (modalNode, clickedPicture) => {
 			for (let comment of comments) {
 				modalCommentsContainerNode.append(createComment(comment.avatar, comment.name, comment.message));
 			}
+
+
+			//# скрытие всех комментариев
+			const commentsArray = modalNode.querySelectorAll('.social__comment');
+			commentsArray.forEach(comment => {
+				if (comment) {
+					comment.hidden = true;
+				}
+			});
+
+			//# показ 5 комментариев
+			showComments(modalNode);
+
+			//# корректировка количества комментариев (пока не работает в полной мере)
+			correctShownCommentsNumber(shownComentsNode, totalCommentsNode);
+
+			const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
+			showMoreCommentsBtn.addEventListener('click', onShowMoreCommentsBtnClick);
 		}
 	});
 
+}
+
+//@ функция, показывающая 5 комментариев
+const showComments = () => {
+	const hiddenComments = document.querySelectorAll('.social__comment[hidden]');
+
+	for (let i = 0; i < 5; i++) {
+		if (hiddenComments[i]) {
+			hiddenComments[i].hidden = false;
+		}
+	}
+}
+
+//@ функция, корректирующая число показываемых комментариев
+const correctShownCommentsNumber = (shownCommentsNode, totalCommentsNode) => {
+	if (totalCommentsNode.textContent <= 5) {
+		shownCommentsNode.textContent = totalCommentsNode.textContent;
+	} else {
+
+		shownCommentsNode.textContent = 5;
+	}
+}
+
+//# обработчик нажатия на кнопку показа больше комментариев
+const onShowMoreCommentsBtnClick = () => {
+	showComments();
+	// correctShownCommentsNumber(shownComentsNode, totalCommentsNode);
 }
 
 export { fillModal };
