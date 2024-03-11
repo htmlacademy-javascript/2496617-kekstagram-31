@@ -55,6 +55,6 @@ const createPicture = () => {
 }
 
 //# создание результирующего массива
-const createPictures = () => Array.from({ length: PICTURES_NUMBER }, createPicture);
+const picturesArray = Array.from({ length: PICTURES_NUMBER }, createPicture);
 
-export { createPictures }
+export { picturesArray }

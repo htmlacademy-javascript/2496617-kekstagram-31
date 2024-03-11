@@ -4,11 +4,11 @@
 
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
-console.log(checkStringLength('проверяемая строка', 10)); // false
-console.log(checkStringLength('проверяемая строка', 12)); // false
-console.log(checkStringLength('проверяемая строка', 18)); // true
-console.log(checkStringLength('проверяемая строка', 20)); // true
-console.log(checkStringLength('проверяемая строка', 25)); // true
+// console.log(checkStringLength('проверяемая строка', 10)); // false
+// console.log(checkStringLength('проверяемая строка', 12)); // false
+// console.log(checkStringLength('проверяемая строка', 18)); // true
+// console.log(checkStringLength('проверяемая строка', 20)); // true
+// console.log(checkStringLength('проверяемая строка', 25)); // true
 
 // 2. Функция, проверяющая, является ли строка палиндромом
 
@@ -22,11 +22,11 @@ const isPalindrome = (string) => {
     return newString === normalString;
 };
 
-console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
-console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
-console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
-console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
-console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
+// console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
+// console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
+// console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
+// console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
+// console.log(isPalindrome('Лёша на полке клопа нашёл ')); // true
 
 
 // 3. Функция принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа. Если в строке нет ни одной цифры, функция должна вернуть NaN:
@@ -48,14 +48,14 @@ const extractNumber = (string) => {
     return parseInt(output, BASE);
 };
 
-console.log(extractNumber('2023 год'));
-console.log(extractNumber('ECMAScript 2022'));
-console.log(extractNumber('1 кефир, 0.5 батона'));
-console.log(extractNumber('агент 007'));
-console.log(extractNumber('а я томат'));
-console.log(extractNumber(2023));
-console.log(extractNumber(-1));
-console.log(extractNumber(1.5));
+// console.log(extractNumber('2023 год'));
+// console.log(extractNumber('ECMAScript 2022'));
+// console.log(extractNumber('1 кефир, 0.5 батона'));
+// console.log(extractNumber('агент 007'));
+// console.log(extractNumber('а я томат'));
+// console.log(extractNumber(2023));
+// console.log(extractNumber(-1));
+// console.log(extractNumber(1.5));
 
 /*!// !------------ 5.16. Функции возвращаются ------------! //!*/
 
@@ -90,5 +90,5 @@ const times = [
     ['7:00', '15:00', '6:0', 560],
 ]
 for (let time of times) {
-    console.log(checkTimeOverlap(...time));
+    // console.log(checkTimeOverlap(...time));
 }

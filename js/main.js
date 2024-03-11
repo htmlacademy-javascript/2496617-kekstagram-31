@@ -1,2 +1,3 @@
 import './data.js';
-import './draw-pictures.js';
+import './render-thumbnails.js';
+import './modal.js';
