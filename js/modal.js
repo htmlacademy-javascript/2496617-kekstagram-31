@@ -1,12 +1,10 @@
 import { isEscKey } from "./util.js";
-import { fillModal } from "./fill-modal.js";
+import { fillModal, showComments, matchShownCommentsNumber } from "./fill-modal.js";
 
 const picturesContainerNode = document.querySelector('.pictures');
 const modalNode = document.querySelector('.big-picture');
 const closeBtnNode = modalNode.querySelector('.big-picture__cancel');
-
-// const commentsCountNode = modalNode.querySelector('.social__comment-count');
-// const commentsLoaderNode = modalNode.querySelector('.comments-loader');
+const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
 
 
 //# обработчик открывает модальное окно при клике на контейнер с картинками
@@ -33,6 +31,12 @@ const onEscKeydown = (evt) => {
 	}
 }
 
+//# обработчик нажатия на кнопку показа больше комментариев
+const onShowMoreCommentsBtnClick = function () {
+	showComments();
+	matchShownCommentsNumber();
+}
+
 //@ функция, открывающая модальное окно
 const openModal = () => {
 	modalNode.classList.remove('hidden');
@@ -41,6 +45,8 @@ const openModal = () => {
 	document.addEventListener('keydown', onEscKeydown);
 
 	document.body.classList.add('modal-open');
+
+	showMoreCommentsBtn.addEventListener('click', onShowMoreCommentsBtnClick);
 }
 
 //@ функция, закрывающая модальное окно
@@ -51,5 +57,7 @@ const closeModal = () => {
 	document.removeEventListener('keydown', onEscKeydown);
 
 	document.body.classList.remove('modal-open');
+
+	showMoreCommentsBtn.removeEventListener('click', onShowMoreCommentsBtnClick);
 }
 

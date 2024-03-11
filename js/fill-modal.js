@@ -8,8 +8,8 @@ const createComment = (src, name, message) => {
 	const commentImg = document.createElement('img');
 	commentImg.src = src;
 	commentImg.alt = name;
-	commentImg.style.width = 35 + 'px';
-	commentImg.style.height = 35 + 'px';
+	commentImg.style.width = '35px';
+	commentImg.style.height = '35px';
 
 	const commentMessage = document.createElement('p');
 	commentMessage.textContent = message;
@@ -23,36 +23,33 @@ const createComment = (src, name, message) => {
 //@ функция, наполняющая модальное окно
 const fillModal = (modalNode, clickedPicture) => {
 
-	//# блок количества комментариев
-	const shownComentsNode = modalNode.querySelector('.social__comment-shown-count');
-	const totalCommentsNode = modalNode.querySelector('.social__comment-total-count');
-
-	//# блок списка комментариев
+	// блок количества комментариев
+	const totalCommentsNumberNode = modalNode.querySelector('.social__comment-total-count');
+	// блок списка комментариев
 	const modalCommentsContainerNode = modalNode.querySelector('.social__comments');
 
-	//# перебор массива фотографий
+	// перебор массива фотографий
 	picturesArray.forEach(({ id, url, likes, comments, description }) => {
 
-		//# проверка, что id в объекте-фотографии соответствует номеру нажатой миниатюры
+		// проверка, что id в объекте-фотографии соответствует номеру нажатой миниатюры
 		if (id == clickedPicture.id) {
 
-			//# заполнение модального окна соответствующими данными
+			// заполнение модального окна соответствующими данными
 			modalNode.querySelector('.big-picture__img img').src = url;
 			modalNode.querySelector('.likes-count').textContent = likes;
-			totalCommentsNode.textContent = comments.length;
+			totalCommentsNumberNode.textContent = comments.length;
 
 			modalNode.querySelector('.social__caption').textContent = description;
 
-			//# обнуление блока-списка комментариев
+			// обнуление блока-списка комментариев
 			modalCommentsContainerNode.innerHTML = null;
 
-			//# заполнение блока-списка соответствующими комментариями
+			// заполнение блока-списка соответствующими комментариями
 			for (let comment of comments) {
 				modalCommentsContainerNode.append(createComment(comment.avatar, comment.name, comment.message));
 			}
 
-
-			//# скрытие всех комментариев
+			// скрытие всех комментариев
 			const commentsArray = modalNode.querySelectorAll('.social__comment');
 			commentsArray.forEach(comment => {
 				if (comment) {
@@ -60,14 +57,11 @@ const fillModal = (modalNode, clickedPicture) => {
 				}
 			});
 
-			//# показ 5 комментариев
+			// показ сразу 5 комментариев
 			showComments(modalNode);
 
-			//# корректировка количества комментариев (пока не работает в полной мере)
-			correctShownCommentsNumber(shownComentsNode, totalCommentsNode);
-
-			const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
-			showMoreCommentsBtn.addEventListener('click', onShowMoreCommentsBtnClick);
+			// корректировка количества показываемых комментариев
+			matchShownCommentsNumber();
 		}
 	});
 
@@ -85,19 +79,13 @@ const showComments = () => {
 }
 
 //@ функция, корректирующая число показываемых комментариев
-const correctShownCommentsNumber = (shownCommentsNode, totalCommentsNode) => {
-	if (totalCommentsNode.textContent <= 5) {
-		shownCommentsNode.textContent = totalCommentsNode.textContent;
-	} else {
+const matchShownCommentsNumber = function () {
+	const shownCommentsNumberNode = document.querySelector('.social__comment-shown-count');
 
-		shownCommentsNode.textContent = 5;
-	}
+	const totalCommentsArray = [...document.querySelectorAll('.social__comment')];
+	const shownCommentsArray = totalCommentsArray.filter(comment => !comment.hasAttribute('hidden'))
+
+	shownCommentsNumberNode.textContent = shownCommentsArray.length;
 }
 
-//# обработчик нажатия на кнопку показа больше комментариев
-const onShowMoreCommentsBtnClick = () => {
-	showComments();
-	// correctShownCommentsNumber(shownComentsNode, totalCommentsNode);
-}
-
-export { fillModal };
+export { fillModal, showComments, matchShownCommentsNumber };
