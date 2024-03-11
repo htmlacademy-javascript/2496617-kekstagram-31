@@ -21,8 +21,7 @@ const createComment = (src, name, message) => {
 
 
 //@ функция, наполняющая модальное окно
-const fillModal = (modalNode, clickedPicture) => {
-
+const fillModal = (clickedPicture, modalNode, showMoreCommentsBtn) => {
 	
 	// перебор массива фотографий
 	picturesArray.forEach(({ id, url, likes, comments, description }) => {
@@ -57,8 +56,6 @@ const fillModal = (modalNode, clickedPicture) => {
 			// показ сразу 5 комментариев
 			showComments(modalNode);
 			
-			// кнопка "показать больше комментариев"
-			const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
 			// корректировка количества показываемых комментариев
 			matchShownCommentsNumber(showMoreCommentsBtn);
 		}
