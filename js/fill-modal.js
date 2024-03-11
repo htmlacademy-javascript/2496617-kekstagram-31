@@ -23,10 +23,10 @@ const createComment = (src, name, message) => {
 //@ функция, наполняющая модальное окно
 const fillModal = (modalNode, clickedPicture) => {
 
-	// блок количества комментариев
-	const totalCommentsNumberNode = modalNode.querySelector('.social__comment-total-count');
 	// блок списка комментариев
 	const modalCommentsContainerNode = modalNode.querySelector('.social__comments');
+	// кнопка "показать больше комментариев"
+	const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
 
 	// перебор массива фотографий
 	picturesArray.forEach(({ id, url, likes, comments, description }) => {
@@ -37,7 +37,7 @@ const fillModal = (modalNode, clickedPicture) => {
 			// заполнение модального окна соответствующими данными
 			modalNode.querySelector('.big-picture__img img').src = url;
 			modalNode.querySelector('.likes-count').textContent = likes;
-			totalCommentsNumberNode.textContent = comments.length;
+			modalNode.querySelector('.social__comment-total-count').textContent = comments.length;
 
 			modalNode.querySelector('.social__caption').textContent = description;
 
@@ -61,7 +61,7 @@ const fillModal = (modalNode, clickedPicture) => {
 			showComments(modalNode);
 
 			// корректировка количества показываемых комментариев
-			matchShownCommentsNumber();
+			matchShownCommentsNumber(showMoreCommentsBtn);
 		}
 	});
 
@@ -79,13 +79,25 @@ const showComments = () => {
 }
 
 //@ функция, корректирующая число показываемых комментариев
-const matchShownCommentsNumber = function () {
+const matchShownCommentsNumber = (btnItSelf) => {
 	const shownCommentsNumberNode = document.querySelector('.social__comment-shown-count');
 
 	const totalCommentsArray = [...document.querySelectorAll('.social__comment')];
 	const shownCommentsArray = totalCommentsArray.filter(comment => !comment.hasAttribute('hidden'))
 
 	shownCommentsNumberNode.textContent = shownCommentsArray.length;
+
+	toggleShowMoreCommentsBtnVisibility(totalCommentsArray.length, shownCommentsArray.length, btnItSelf);
+	
+}
+
+//@ функция, показывающая/скрывающая кнопку "показать ещё"
+const toggleShowMoreCommentsBtnVisibility = (totalNum, ShownNum, btn) => {
+	if (totalNum == ShownNum) {
+		btn.setAttribute('hidden', true);
+	} else {
+		btn.removeAttribute('hidden');
+	}
 }
 
 export { fillModal, showComments, matchShownCommentsNumber };

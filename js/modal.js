@@ -11,7 +11,7 @@ const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
 const onpicturesContainerNodeClick = (evt) => {
 	const clickedPicture = evt.target.closest('.picture');
 
-	fillModal(modalNode, clickedPicture); //! заполнение модалки внутри обработчика норм?
+	fillModal(modalNode, clickedPicture); //? заполнение модалки внутри обработчика норм?
 	
 	openModal();
 }
@@ -34,7 +34,7 @@ const onEscKeydown = (evt) => {
 //# обработчик нажатия на кнопку показа больше комментариев
 const onShowMoreCommentsBtnClick = function () {
 	showComments();
-	matchShownCommentsNumber();
+	matchShownCommentsNumber(this);
 }
 
 //@ функция, открывающая модальное окно
