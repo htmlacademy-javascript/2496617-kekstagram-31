@@ -10,10 +10,12 @@ const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
 //# обработчик открывает модальное окно при клике на контейнер с картинками
 const onPicturesContainerNodeClick = (evt) => {
 	const clickedPicture = evt.target.closest('.picture');
-
-	fillModal(clickedPicture, modalNode, showMoreCommentsBtn); //? заполнение модалки внутри обработчика норм?
 	
-	openModal();
+	if (clickedPicture) {
+		fillModal(clickedPicture, modalNode, showMoreCommentsBtn); //? заполнение модалки внутри обработчика норм?
+		openModal();
+	}
+
 }
 
 picturesContainerNode.addEventListener('click', onPicturesContainerNodeClick);
