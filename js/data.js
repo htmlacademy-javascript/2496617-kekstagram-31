@@ -28,12 +28,26 @@ const NAMES = [
 //# небоходимое количество объектов
 const PICTURES_NUMBER = 25;
 
+//! критерий Д19
+const MIN_COMMENTS_ID_COUNT = 1;
+const MAX_COMMENTS_ID_COUNT = 1000;
+
+const MIN_AVATAR_ID_COUNT = 1;
+const MAX_AVATAR_ID_COUNT = 6;
+
+const MIN_LIKES_COUNT = 15;
+const MAX_LIKES_COUNT = 200;
+
+const MIN_COMMENTS_COUNT = 0;
+const MAX_COMMENTS_COUNT = 30;
+
+
 
 //@ функция, создающия случайный комментарий
 const createCommment = () => {
 	return {
-		id: getRandPosInt(1, 1000),
-		avatar: `img/avatar-${getRandPosInt(1, 6)}.svg`,
+		id: getRandPosInt(MIN_COMMENTS_ID_COUNT, MAX_COMMENTS_ID_COUNT),
+		avatar: `img/avatar-${getRandPosInt(MIN_AVATAR_ID_COUNT, MAX_AVATAR_ID_COUNT)}.svg`,
 		message: getRandomElement(COMMENTS_EXAMPLES),
 		name: getRandomElement(NAMES),
 	}
@@ -49,8 +63,8 @@ const createPicture = () => {
 		id: generatedId,
 		url: `photos/${generatedId}.jpg`,
 		description: `описание фотографии № ${generatedId}`,
-		likes: getRandPosInt(15, 200),
-		comments: Array.from({ length: getRandPosInt(0, 30) }, createCommment)
+		likes: getRandPosInt(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
+		comments: Array.from({ length: getRandPosInt(MIN_COMMENTS_COUNT, MAX_COMMENTS_COUNT) }, createCommment)
 	}
 }
 
