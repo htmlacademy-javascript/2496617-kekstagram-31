@@ -19,48 +19,45 @@ const createComment = (src, name, message) => {
 	return comment;
 }
 
+// создание коллекции Map из массива объектов-фотографий, в которой элементы - это массивы пар [id - (сам)объект]
+const picturesMap = picturesArray.reduce((map, pictureObject) => {
+	map.set(pictureObject.id, pictureObject)
+	return map;
+}, new Map());
+
 
 //@ функция, наполняющая модальное окно
 const fillModal = (clickedPicture, modalNode, showMoreCommentsBtn) => {
-	
-	// перебор массива фотографий
-	picturesArray.forEach(({ id, url, likes, comments, description }) => {
-		
-		// проверка, что id в объекте-фотографии соответствует номеру нажатой миниатюры
-		if (id == clickedPicture.id) {
-			
-			// заполнение модального окна соответствующими данными
-			modalNode.querySelector('.big-picture__img img').src = url;
-			modalNode.querySelector('.likes-count').textContent = likes;
-			modalNode.querySelector('.social__comment-total-count').textContent = comments.length;
-			
-			modalNode.querySelector('.social__caption').textContent = description;
-			
-			// блок списка комментариев
-			const modalCommentsContainerNode = modalNode.querySelector('.social__comments');
-			// обнуление блока-списка комментариев
-			modalCommentsContainerNode.innerHTML = null;
-			// заполнение блока-списка соответствующими комментариями
-			for (let comment of comments) {
-				modalCommentsContainerNode.append(createComment(comment.avatar, comment.name, comment.message));
-			}
-			
-			// скрытие всех комментариев
-			const commentsArray = modalNode.querySelectorAll('.social__comment');
-			commentsArray.forEach(comment => {
-				if (comment) {
-					comment.hidden = true;
-				}
-			});
-			
-			// показ сразу 5 комментариев
-			showComments(modalNode);
-			
-			// корректировка количества показываемых комментариев
-			matchShownCommentsNumber(showMoreCommentsBtn);
+
+	const { url, likes, comments, description } = picturesMap.get(Number(clickedPicture.id));
+
+	modalNode.querySelector('.big-picture__img img').src = url;
+	modalNode.querySelector('.likes-count').textContent = likes;
+	modalNode.querySelector('.social__comment-total-count').textContent = comments.length;
+	modalNode.querySelector('.social__caption').textContent = description;
+
+	// блок списка комментариев
+	const modalCommentsContainerNode = modalNode.querySelector('.social__comments');
+	// обнуление блока-списка комментариев
+	modalCommentsContainerNode.innerHTML = null;
+	// заполнение блока-списка соответствующими комментариями
+	for (let comment of comments) {
+		modalCommentsContainerNode.append(createComment(comment.avatar, comment.name, comment.message));
+	}
+
+	// скрытие всех комментариев
+	const commentsArray = modalNode.querySelectorAll('.social__comment');
+	commentsArray.forEach(comment => {
+		if (comment) {
+			comment.hidden = true;
 		}
 	});
 
+	// показ сразу 5 комментариев
+	showComments(modalNode);
+
+	// корректировка количества показываемых комментариев
+	matchShownCommentsNumber(showMoreCommentsBtn);
 }
 
 //@ функция, показывающая 5 комментариев
@@ -84,7 +81,6 @@ const matchShownCommentsNumber = (btnItSelf) => {
 	shownCommentsNumberNode.textContent = shownCommentsArray.length;
 
 	toggleShowMoreCommentsBtnVisibility(totalCommentsArray.length, shownCommentsArray.length, btnItSelf);
-	
 }
 
 //@ функция, показывающая/скрывающая кнопку "показать ещё"
