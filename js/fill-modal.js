@@ -6,12 +6,14 @@ const createComment = (src, name, message) => {
 	comment.classList.add('social__comment');
 
 	const commentImg = document.createElement('img');
+	commentImg.classList.add('social__picture');
 	commentImg.src = src;
 	commentImg.alt = name;
 	commentImg.style.width = '35px';
 	commentImg.style.height = '35px';
 
 	const commentMessage = document.createElement('p');
+	commentMessage.classList.add('social__text');
 	commentMessage.textContent = message;
 
 	comment.append(commentImg, commentMessage);
@@ -40,24 +42,29 @@ const fillModal = (clickedPicture, modalNode, showMoreCommentsBtn) => {
 	const modalCommentsContainerNode = modalNode.querySelector('.social__comments');
 	// обнуление блока-списка комментариев
 	modalCommentsContainerNode.innerHTML = null;
-	// заполнение блока-списка соответствующими комментариями
-	for (let comment of comments) {
+	// заполнение блока-списка соответствующими комментариями	
+	comments.forEach(comment => {
 		modalCommentsContainerNode.append(createComment(comment.avatar, comment.name, comment.message));
-	}
+	})
 
 	// скрытие всех комментариев
-	const commentsArray = modalNode.querySelectorAll('.social__comment');
-	commentsArray.forEach(comment => {
-		if (comment) {
-			comment.hidden = true;
-		}
-	});
+	hideAllComments(modalNode);
 
 	// показ сразу 5 комментариев
 	showComments(modalNode);
 
 	// корректировка количества показываемых комментариев
 	matchShownCommentsNumber(showMoreCommentsBtn);
+}
+
+//@ функция, скрывающая все комментарии
+const hideAllComments = (modalNode) => {
+	const commentsArray = modalNode.querySelectorAll('.social__comment');
+	commentsArray.forEach(comment => {
+		if (comment) {
+			comment.hidden = true;
+		}
+	});
 }
 
 //@ функция, показывающая 5 комментариев
