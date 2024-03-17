@@ -5,7 +5,7 @@ const getRandPosInt = (min, max) => {
 	const result = Math.random() * (upper - lower + 1) + lower;
 
 	return Math.floor(result);
-}
+};
 
 //@ функция, выбирающая случайный элемент массива
 const getRandomElement = (arr) => arr[getRandPosInt(0, arr.length - 1)];
@@ -17,14 +17,19 @@ const createIdGenerator = () => {
 	return function () {
 		lastGeneratedId++;
 
-		return lastGeneratedId
-	}
-}
+		return lastGeneratedId;
+	};
+};
 
 //@ функция-генератор идентификаторов
 const generateId = createIdGenerator();
 
 //@ функция, проверяющая, что нажатая клавиша - ESC
-const isEscKey = (evt) => evt.key === 'Escape'
+const isEscKey = (evt) => evt.key === 'Escape';
 
-export { getRandPosInt, getRandomElement, generateId, isEscKey };
+//@ функция, разбивающая по пробелу значение инпута на массив
+const splitInput = (input) => {
+	return input.value.split(' ');
+};
+
+export { getRandPosInt, getRandomElement, generateId, isEscKey, splitInput };
