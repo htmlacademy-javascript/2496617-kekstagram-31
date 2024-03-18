@@ -3,12 +3,9 @@ import { splitInput } from "./util.js";
 const form = document.querySelector('.img-upload__form');
 
 /*!// !------------ temporary ------------! //!*/
-const formOverlay = form.querySelector('.img-upload__overlay');
-formOverlay.classList.remove('hidden');
-
 const inputFile = document.querySelector('.img-upload__input');
 inputFile.required = false;
-/*!// !-----------------------------------! //!*/
+/*!// !-------------------------------------------------------! //!*/
 
 /*?// ?------------ |> Pristine is not defined? |>------------? //?*/
 const pristine = new Pristine(form, {
