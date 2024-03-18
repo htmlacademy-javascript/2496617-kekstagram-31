@@ -1,29 +1,28 @@
-import { picturesArray } from './data.js'
+import { picturesArray } from './data.js';
 
 //# шаблон миниатюры
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 //# список-сетка миниатюр
-const picturesListNode = document.querySelector('.pictures');
+const picturesListElement = document.querySelector('.pictures');
 
 //# фрагмент
-//! а для чего он нужен кстати?
 const picturesListFragment = document.createDocumentFragment();
 
 //# присвоение данных в шаблон миниатюр
 picturesArray.forEach(
 	({ id, url, description, likes, comments }) => {
-		const pictureNode = pictureTemplate.cloneNode(true);
-		pictureNode.querySelector('.picture__img').src = url;
-		pictureNode.querySelector('.picture__img').alt = description;
-		pictureNode.querySelector('.picture__likes').textContent = likes;
-		pictureNode.querySelector('.picture__comments').textContent = comments.length;
+		const pictureElement = pictureTemplate.cloneNode(true);
+		pictureElement.querySelector('.picture__img').src = url;
+		pictureElement.querySelector('.picture__img').alt = description;
+		pictureElement.querySelector('.picture__likes').textContent = likes;
+		pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
-		//# присвеоние миниатюре идентификатора, соответсвующего идентификатора
-		pictureNode.setAttribute('id', id);
+		//# присвоение миниатюре идентификатора, соответствующего идентификатора
+		pictureElement.setAttribute('id', id);
 
-		picturesListFragment.append(pictureNode);
+		picturesListFragment.append(pictureElement);
 	}
 );
 
-picturesListNode.append(picturesListFragment);
+picturesListElement.append(picturesListFragment);

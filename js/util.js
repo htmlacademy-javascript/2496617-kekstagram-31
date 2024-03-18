@@ -1,5 +1,5 @@
 //@ функция, генерирующая случайное число в диапазоне
-const getRandPosInt = (min, max) => {
+const getRandomPositiveInteger = (min, max) => {
 	const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
 	const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
 	const result = Math.random() * (upper - lower + 1) + lower;
@@ -8,7 +8,7 @@ const getRandPosInt = (min, max) => {
 };
 
 //@ функция, выбирающая случайный элемент массива
-const getRandomElement = (arr) => arr[getRandPosInt(0, arr.length - 1)];
+const getRandomElement = (arr) => arr[getRandomPositiveInteger(0, arr.length - 1)];
 
 //@ функция, создающая генераторы
 const createIdGenerator = () => {
@@ -32,4 +32,4 @@ const splitInput = (input) => {
 	return input.value.split(' ');
 };
 
-export { getRandPosInt, getRandomElement, generateId, isEscKey, splitInput };
+export { getRandomPositiveInteger, getRandomElement, generateId, isEscKey, splitInput };

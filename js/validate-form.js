@@ -1,9 +1,9 @@
 import { splitInput } from "./util.js";
 
-const form = document.querySelector('.img-upload__form');
+const formElement = document.querySelector('.img-upload__form');
 
 /*?// ?------------ |> Pristine is not defined? |>------------? //?*/
-const pristine = new Pristine(form, {
+const pristine = new Pristine(formElement, {
 	classTo: 'img-upload__field-wrapper',
 	errorClass: 'img-upload__field-wrapper--invalid',
 	successClass: 'img-upload__field-wrapper--valid',
@@ -15,7 +15,7 @@ const pristine = new Pristine(form, {
 
 
 // $------------------------ валидация хэштегов ------------------------$ //
-const hashtagInputNode = form.querySelector('.text__hashtags');
+const hashtagInputElement = formElement.querySelector('.text__hashtags');
 const hashtagRegExp = /^#[a-zа-яё0-9]{1,19}$/i;
 
 //@ функция, проверяющая, что хэштег соответствует регулярному выражению
@@ -23,8 +23,8 @@ const validateHashtag = (hashtag) => hashtagRegExp.test(hashtag);
 
 //@ функция, проверяющая хэштеги на формат
 const validateHashtagsFormat = () => {
-	if (hashtagInputNode.value != '') {
-		const isEveryHashtagValid = splitInput(hashtagInputNode).every(hashtagElem => validateHashtag(hashtagElem));
+	if (hashtagInputElement.value != '') {
+		const isEveryHashtagValid = splitInput(hashtagInputElement).every(hashtagElem => validateHashtag(hashtagElem));
 		return isEveryHashtagValid;
 	}
 	return true;
@@ -32,31 +32,31 @@ const validateHashtagsFormat = () => {
 
 //@ функция, проверяющая хэштеги на количество
 const validateHashtagsAmount = () =>
-	hashtagInputNode.value == '' || splitInput(hashtagInputNode).length <= 5;
+	hashtagInputElement.value == '' || splitInput(hashtagInputElement).length <= 5;
 
 
 //@ функция, проверяющая повторы хэштегов
 const validateHashtagsDuplicates = () =>
-	new Set(splitInput(hashtagInputNode)).size == splitInput(hashtagInputNode).length;
+	new Set(splitInput(hashtagInputElement)).size == splitInput(hashtagInputElement).length;
 
 
 
 //# валидация формата хэштегов
 pristine.addValidator(
-	hashtagInputNode,
+	hashtagInputElement,
 	validateHashtagsFormat,
 	'хэштег должен начинаться с символа # и быть не более 20 символов'
 );
 
 //# валидация количества хэштегов
 pristine.addValidator(
-	hashtagInputNode,
+	hashtagInputElement,
 	validateHashtagsAmount,
 	'количество хэштегов должно быть не более 5'
 );
 //# валидация повтора хэштегов
 pristine.addValidator(
-	hashtagInputNode,
+	hashtagInputElement,
 	validateHashtagsDuplicates,
 	'хэштеги не должны повторяться'
 );
@@ -64,10 +64,10 @@ pristine.addValidator(
 
 
 // $------------------------ валидация комментария ------------------------$ //
-const commentInputNode = document.querySelector('.text__description');
+const commentInputElement = document.querySelector('.text__description');
 //@ функция, проверяющая поле комментария на валидность
 const validateCommentInput = () => {
-	if (commentInputNode.value == '' || commentInputNode.value.length <= 140) {
+	if (commentInputElement.value == '' || commentInputElement.value.length <= 140) {
 		return true;
 	}
 	return false;
@@ -75,14 +75,14 @@ const validateCommentInput = () => {
 
 //# валидация инпута комментария
 pristine.addValidator(
-	commentInputNode,
+	commentInputElement,
 	validateCommentInput,
 	'комментарий должен быть не более 140 символов'
 );
 // $-----------------------------------------------------------------------$ //
 
 
-
+// $------------------------ отправка формы ------------------------$ //
 //# обработчик отправки формы
 const onFormSubmit = (evt) => {
 	const isValid = pristine.validate();
@@ -95,4 +95,6 @@ const onFormSubmit = (evt) => {
 	}
 }
 //# отправка формы
-form.addEventListener('submit', onFormSubmit);
+formElement.addEventListener('submit', onFormSubmit);
+
+//? при отправке валидной формы переходит на страницу, где написано ошибка
