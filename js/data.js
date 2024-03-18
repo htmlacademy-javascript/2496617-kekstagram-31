@@ -25,7 +25,7 @@ const NAMES = [
 	'Алина',
 ]
 
-//# небоходимое количество объектов
+//# необходимое количество объектов
 const PICTURES_NUMBER = 25;
 
 //! критерий Д19
@@ -43,8 +43,8 @@ const MAX_COMMENTS_COUNT = 30;
 
 
 
-//@ функция, создающия случайный комментарий
-const createCommment = () => {
+//@ функция, создающая случайный комментарий
+const createComment = () => {
 	return {
 		id: getRandPosInt(MIN_COMMENTS_ID_COUNT, MAX_COMMENTS_ID_COUNT),
 		avatar: `img/avatar-${getRandPosInt(MIN_AVATAR_ID_COUNT, MAX_AVATAR_ID_COUNT)}.svg`,
@@ -64,7 +64,7 @@ const createPicture = () => {
 		url: `photos/${generatedId}.jpg`,
 		description: `описание фотографии № ${generatedId}`,
 		likes: getRandPosInt(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
-		comments: Array.from({ length: getRandPosInt(MIN_COMMENTS_COUNT, MAX_COMMENTS_COUNT) }, createCommment)
+		comments: Array.from({ length: getRandPosInt(MIN_COMMENTS_COUNT, MAX_COMMENTS_COUNT) }, createComment)
 	}
 }
 
