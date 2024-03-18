@@ -2,11 +2,6 @@ import { splitInput } from "./util.js";
 
 const form = document.querySelector('.img-upload__form');
 
-/*!// !------------ temporary ------------! //!*/
-const inputFile = document.querySelector('.img-upload__input');
-inputFile.required = false;
-/*!// !-------------------------------------------------------! //!*/
-
 /*?// ?------------ |> Pristine is not defined? |>------------? //?*/
 const pristine = new Pristine(form, {
 	classTo: 'img-upload__field-wrapper',
@@ -88,16 +83,16 @@ pristine.addValidator(
 
 
 
-//# отправка формы
-form.addEventListener('submit', (evt) => {
-	evt.preventDefault();
-
+//# обработчик отправки формы
+const onFormSubmit = (evt) => {
 	const isValid = pristine.validate();
-
-
+	
 	if (isValid) {
 		console.log('можно отправлять');
 	} else {
+		evt.preventDefault();
 		console.log('форма не валидна');
 	}
-});
+}
+//# отправка формы
+form.addEventListener('submit', onFormSubmit);
