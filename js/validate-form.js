@@ -26,7 +26,7 @@ const pristine = new Pristine(form, {
 const hashtagInputNode = form.querySelector('.text__hashtags');
 const hashtagRegExp = /^#[a-zа-яё0-9]{1,19}$/i;
 
-//@ функция, проверяющая, что хэштег сответствует регулярному выражению
+//@ функция, проверяющая, что хэштег соответствует регулярному выражению
 const validateHashtag = (hashtag) => hashtagRegExp.test(hashtag);
 
 //@ функция, проверяющая хэштеги на формат
@@ -42,6 +42,13 @@ const validateHashtagsFormat = () => {
 const validateHashtagsAmount = () =>
 	hashtagInputNode.value == '' || splitInput(hashtagInputNode).length <= 5;
 
+
+//@ функция, проверяющая повторы хэштегов
+const validateHashtagsDuplicates = () =>
+	new Set(splitInput(hashtagInputNode)).size == splitInput(hashtagInputNode).length;
+
+
+
 //# валидация формата хэштегов
 pristine.addValidator(
 	hashtagInputNode,
@@ -54,6 +61,12 @@ pristine.addValidator(
 	hashtagInputNode,
 	validateHashtagsAmount,
 	'количество хэштегов должно быть не более 5'
+);
+//# валидация повтора хэштегов
+pristine.addValidator(
+	hashtagInputNode,
+	validateHashtagsDuplicates,
+	'хэштеги не должны повторяться'
 );
 // $-------------------------------------------------------------------$ //
 
@@ -83,7 +96,6 @@ form.addEventListener('submit', (evt) => {
 	evt.preventDefault();
 
 	const isValid = pristine.validate();
-
 
 
 	if (isValid) {
