@@ -94,7 +94,8 @@ const onFormSubmit = (evt) => {
 		console.log('форма не валидна');
 	}
 }
-//# отправка формы
-formElement.addEventListener('submit', onFormSubmit);
+
+
+export {formElement, onFormSubmit}
 
 //? при отправке валидной формы переходит на страницу, где написано ошибка

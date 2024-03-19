@@ -1,4 +1,5 @@
 import { isEscKey } from "./util.js";
+import { formElement, onFormSubmit } from "./validate-form.js";
 
 const uploadImgInputElement = document.querySelector('.img-upload__input');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
@@ -12,6 +13,9 @@ const openUploadOverlay = () => {
 	window.addEventListener('keydown', onWindowKeydown);
 
 	document.body.classList.add('modal-open');
+
+	//# отправка формы
+	formElement.addEventListener('submit', onFormSubmit);
 };
 
 //@ функция, закрывающая форму загрузки и обработки изображения
@@ -22,6 +26,9 @@ const closeUploadOverlay = () => {
 	window.removeEventListener('keydown', onWindowKeydown);
 
 	document.body.classList.remove('modal-open');
+
+	//# отправка формы
+	formElement.removeEventListener('submit', onFormSubmit);
 };
 
 //# обработчик нажатия на крестик
