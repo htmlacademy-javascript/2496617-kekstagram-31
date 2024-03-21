@@ -1,8 +1,6 @@
 import { isEscKey, checkInputsFocus } from "./util.js";
 import { formElement, onFormSubmit, pristine } from "./validate-form.js";
-import { effectsListElement, onEffectsListElementChange } from './edit-image.js';
-import { scaleElement, onScaleElementClick } from './edit-image.js';
-
+import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick } from './edit-image.js';
 
 // $======================== UPLOAD IMAGE ========================$ //
 // $======================== UPLOAD IMAGE ========================$ //
@@ -28,7 +26,6 @@ const openUploadOverlay = () => {
 
 	//# настройка фильтров
 	effectsListElement.addEventListener('change', onEffectsListElementChange);
-
 };
 
 //@ функция, закрывающая форму загрузки и обработки изображения
@@ -54,6 +51,7 @@ const closeUploadOverlay = () => {
 
 	//# удаление сообщений-ошибок
 	pristine.reset();
+
 };
 
 //# обработчик нажатия на крестик
