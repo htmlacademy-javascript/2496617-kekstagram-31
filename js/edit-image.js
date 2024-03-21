@@ -42,15 +42,11 @@ const onScaleElementClick = (evt) => {
 const FILTERS = [
 	{
 		id: 'effect-none',
-		cssProperty: 'none',
-		min: 0,
-		max: 0,
-		step: 0,
-		decimals: 0,
+		filterValue: 'none',
 	},
 	{
 		id: 'effect-chrome',
-		cssProperty: 'grayscale',
+		filterValue: 'grayscale',
 		min: 0,
 		max: 1,
 		step: 0.1,
@@ -58,7 +54,7 @@ const FILTERS = [
 	},
 	{
 		id: 'effect-sepia',
-		cssProperty: 'sepia',
+		filterValue: 'sepia',
 		min: 0,
 		max: 1,
 		step: 0.1,
@@ -66,7 +62,7 @@ const FILTERS = [
 	},
 	{
 		id: 'effect-marvin',
-		cssProperty: 'invert',
+		filterValue: 'invert',
 		min: 0,
 		max: 1,
 		step: 0.01,
@@ -74,7 +70,7 @@ const FILTERS = [
 	},
 	{
 		id: 'effect-phobos',
-		cssProperty: 'blur',
+		filterValue: 'blur',
 		min: 0,
 		max: 3,
 		step: 0.1,
@@ -82,7 +78,7 @@ const FILTERS = [
 	},
 	{
 		id: 'effect-heat',
-		cssProperty: 'brightness',
+		filterValue: 'brightness',
 		min: 1,
 		max: 3,
 		step: 0.1,
@@ -119,7 +115,7 @@ const filterEffectsMap = FILTERS.reduce((map, filterEffectObject) => {
 
 
 //@ функция, настраивающая эффект
-const adjustEffect = (cssProperty, minValue, maxValue, stepValue, decimals) => {
+const adjustEffect = (filterValue, minValue = 0, maxValue = 1, stepValue = 0.1, decimals = 1) => {
 
 	// обновление настроек слайдера
 	effectSliderElement.noUiSlider.updateOptions({
@@ -145,19 +141,15 @@ const adjustEffect = (cssProperty, minValue, maxValue, stepValue, decimals) => {
 	// изменение значения фильтра с помощью ползунка
 	effectSliderElement.noUiSlider.on('update', () => {
 		effectValueElement.value = effectSliderElement.noUiSlider.get();
-		imageElement.style.filter = `${cssProperty}(${effectValueElement.value})`;
+		imageElement.style.filter = `${filterValue}(${effectValueElement.value})`;
 
-		if (cssProperty === 'blur') {
-			imageElement.style.filter = `${cssProperty}(${effectValueElement.value}px)`;
+		if (filterValue === 'blur') {
+			imageElement.style.filter = `${filterValue}(${effectValueElement.value}px)`;
 		}
 
-		if (cssProperty === 'none') {
+		if (filterValue === 'none') {
 			effectLevelElement.style.display = 'none';
-
-			//? почему не применяется свойство 'none' из массива объектов (при этом обнуление то происходит) 
-			// прописываю это ещё раз:
-			imageElement.style.filter = 'none';
-
+			imageElement.style.filter = `${filterValue}`;
 		} else {
 			effectLevelElement.style.display = 'block';
 		}
@@ -168,8 +160,8 @@ const adjustEffect = (cssProperty, minValue, maxValue, stepValue, decimals) => {
 const onEffectsListElementChange = (evt) => {
 	const checkedInput = evt.target;
 	if (checkedInput.tagName == 'INPUT') {
-		const { cssProperty, min, max, step, decimals } = filterEffectsMap.get(checkedInput.id);
-		adjustEffect(cssProperty, min, max, step, decimals);
+		const { filterValue, min, max, step, decimals } = filterEffectsMap.get(checkedInput.id);
+		adjustEffect(filterValue, min, max, step, decimals);
 	}
 };
 // назначение обработчика в модуле upload-image.js
