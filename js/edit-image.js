@@ -1,43 +1,5 @@
 import '../vendor/nouislider/nouislider.js';
 
-
-// $======================== IMAGE SIZE ========================$ //
-// $======================== IMAGE SIZE ========================$ //
-
-const SCALE_STEP = 25;
-const PARSING_BASE = 10;
-const MIN_SCALE_VALUE = 25;
-const MAX_SCALE_VALUE = 100;
-
-const scaleElement = document.querySelector('.img-upload__scale');
-const scaleControlElement = document.querySelector('.scale__control--value');
-const imageElement = document.querySelector('.img-upload__preview img');
-
-//@ функция, меняющая размер картинки
-const changeImageSize = () => {
-	imageElement.style.transform = `scale(${scaleControlElement.value})`;
-};
-
-//# обработчик нажатия на кнопки +/-
-const onScaleElementClick = (evt) => {
-	const scaleControlNumber = parseInt(scaleControlElement.value, PARSING_BASE);
-
-	if (evt.target.classList.contains('scale__control--smaller') &&
-		scaleControlNumber > MIN_SCALE_VALUE) {
-		scaleControlElement.value = scaleControlNumber - SCALE_STEP + '%';
-	}
-	if (evt.target.classList.contains('scale__control--bigger') &&
-		scaleControlNumber < MAX_SCALE_VALUE) {
-		scaleControlElement.value = scaleControlNumber + SCALE_STEP + '%';
-	}
-
-	changeImageSize();
-};
-// назначение обработчика в модуле upload-image.js
-
-
-// $======================== EFFECTS ========================$ //
-// $======================== EFFECTS ========================$ //
 //# массив объектов-фильтров эффектов
 const FILTERS = [
 	{
@@ -85,6 +47,45 @@ const FILTERS = [
 		decimals: 1,
 	},
 ];
+
+
+// $======================== IMAGE SIZE ========================$ //
+// $======================== IMAGE SIZE ========================$ //
+
+const SCALE_STEP = 25;
+const PARSING_BASE = 10;
+const MIN_SCALE_VALUE = 25;
+const MAX_SCALE_VALUE = 100;
+
+const scaleElement = document.querySelector('.img-upload__scale');
+const scaleControlElement = document.querySelector('.scale__control--value');
+const imageElement = document.querySelector('.img-upload__preview img');
+
+//@ функция, меняющая размер картинки
+const changeImageSize = () => {
+	imageElement.style.transform = `scale(${scaleControlElement.value})`;
+};
+
+//# обработчик нажатия на кнопки +/-
+const onScaleElementClick = (evt) => {
+	const scaleControlNumber = parseInt(scaleControlElement.value, PARSING_BASE);
+
+	if (evt.target.classList.contains('scale__control--smaller') &&
+		scaleControlNumber > MIN_SCALE_VALUE) {
+		scaleControlElement.value = scaleControlNumber - SCALE_STEP + '%';
+	}
+	if (evt.target.classList.contains('scale__control--bigger') &&
+		scaleControlNumber < MAX_SCALE_VALUE) {
+		scaleControlElement.value = scaleControlNumber + SCALE_STEP + '%';
+	}
+
+	changeImageSize();
+};
+// назначение обработчика в модуле upload-image.js
+
+
+// $======================== EFFECTS ========================$ //
+// $======================== EFFECTS ========================$ //
 
 const effectLevelElement = document.querySelector('.effect-level');
 effectLevelElement.style.display = 'none';
