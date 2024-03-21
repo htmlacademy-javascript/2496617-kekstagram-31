@@ -1,26 +1,28 @@
 import { isEscKey } from "./util.js";
 import { fillModal, showComments, matchShownCommentsNumber } from "./fill-modal.js";
 
-const picturesContainerNode = document.querySelector('.pictures');
-const modalNode = document.querySelector('.big-picture');
-const closeBtnNode = modalNode.querySelector('.big-picture__cancel');
-const showMoreCommentsBtn = modalNode.querySelector('.social__comments-loader');
+const picturesContainerElement = document.querySelector('.pictures');
+const modalElement = document.querySelector('.big-picture');
+const closeButtonElement = modalElement.querySelector('.big-picture__cancel');
+const showMoreCommentsButton = modalElement.querySelector('.social__comments-loader');
 
 
 //# обработчик открывает модальное окно при клике на контейнер с картинками
-const onPicturesContainerNodeClick = (evt) => {
+const onPicturesContainerElementClick = (evt) => {
 	const clickedPicture = evt.target.closest('.picture');
-
-	fillModal(clickedPicture, modalNode, showMoreCommentsBtn); //? заполнение модалки внутри обработчика норм?
 	
-	openModal();
+	if (clickedPicture) {
+		fillModal(clickedPicture, modalElement, showMoreCommentsButton); //? заполнение модалки внутри обработчика норм?
+		openModal();
+	}
+
 }
 
-picturesContainerNode.addEventListener('click', onPicturesContainerNodeClick);
+picturesContainerElement.addEventListener('click', onPicturesContainerElementClick);
 
 
 //# обработчик закрывает модальное окно при клике на крестик
-const onCloseBtnNodeClick = () => {
+const onCloseButtonElementClick = () => {
 	closeModal();
 }
 
@@ -32,32 +34,32 @@ const onEscKeydown = (evt) => {
 }
 
 //# обработчик нажатия на кнопку показа больше комментариев
-const onShowMoreCommentsBtnClick = function () {
+const onShowMoreCommentsButtonClick = function () {
 	showComments();
 	matchShownCommentsNumber(this);
 }
 
 //@ функция, открывающая модальное окно
 const openModal = () => {
-	modalNode.classList.remove('hidden');
+	modalElement.classList.remove('hidden');
 
-	closeBtnNode.addEventListener('click', onCloseBtnNodeClick);
+	closeButtonElement.addEventListener('click', onCloseButtonElementClick);
 	document.addEventListener('keydown', onEscKeydown);
 
 	document.body.classList.add('modal-open');
 
-	showMoreCommentsBtn.addEventListener('click', onShowMoreCommentsBtnClick);
+	showMoreCommentsButton.addEventListener('click', onShowMoreCommentsButtonClick);
 }
 
 //@ функция, закрывающая модальное окно
 const closeModal = () => {
-	modalNode.classList.add('hidden');
+	modalElement.classList.add('hidden');
 
-	closeBtnNode.removeEventListener('click', onCloseBtnNodeClick);
+	closeButtonElement.removeEventListener('click', onCloseButtonElementClick);
 	document.removeEventListener('keydown', onEscKeydown);
 
 	document.body.classList.remove('modal-open');
 
-	showMoreCommentsBtn.removeEventListener('click', onShowMoreCommentsBtnClick);
+	showMoreCommentsButton.removeEventListener('click', onShowMoreCommentsButtonClick);
 }
 

@@ -1,4 +1,4 @@
-import { getRandPosInt, getRandomElement, generateId } from "./util.js";
+import { getRandomPositiveInteger, getRandomElement, generateId } from "./util.js";
 
 //# список комментариев
 const COMMENTS_EXAMPLES = [
@@ -25,15 +25,32 @@ const NAMES = [
 	'Алина',
 ]
 
-//# небоходимое количество объектов
+//# необходимое количество объектов
 const PICTURES_NUMBER = 25;
 
+//# минимальное и максимальное значение id комментария
+const MIN_COMMENTS_ID_COUNT = 1;
+const MAX_COMMENTS_ID_COUNT = 1000;
 
-//@ функция, создающия случайный комментарий
-const createCommment = () => {
+//# минимальное и максимальное значение id аватара
+const MIN_AVATAR_ID_COUNT = 1;
+const MAX_AVATAR_ID_COUNT = 6;
+
+//# минимальное и максимальное количество лайков
+const MIN_LIKES_AMOUNT = 15;
+const MAX_LIKES_AMOUNT = 200;
+
+//# минимальное и максимальное количество комментариев
+const MIN_COMMENTS_AMOUNT = 0;
+const MAX_COMMENTS_AMOUNT = 30;
+
+
+
+//@ функция, создающая случайный комментарий
+const createComment = () => {
 	return {
-		id: getRandPosInt(1, 1000),
-		avatar: `img/avatar-${getRandPosInt(1, 6)}.svg`,
+		id: getRandomPositiveInteger(MIN_COMMENTS_ID_COUNT, MAX_COMMENTS_ID_COUNT),
+		avatar: `img/avatar-${getRandomPositiveInteger(MIN_AVATAR_ID_COUNT, MAX_AVATAR_ID_COUNT)}.svg`,
 		message: getRandomElement(COMMENTS_EXAMPLES),
 		name: getRandomElement(NAMES),
 	}
@@ -49,8 +66,8 @@ const createPicture = () => {
 		id: generatedId,
 		url: `photos/${generatedId}.jpg`,
 		description: `описание фотографии № ${generatedId}`,
-		likes: getRandPosInt(15, 200),
-		comments: Array.from({ length: getRandPosInt(0, 30) }, createCommment)
+		likes: getRandomPositiveInteger(MIN_LIKES_AMOUNT, MAX_LIKES_AMOUNT),
+		comments: Array.from({ length: getRandomPositiveInteger(MIN_COMMENTS_AMOUNT, MAX_COMMENTS_AMOUNT) }, createComment)
 	}
 }
 
