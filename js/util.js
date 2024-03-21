@@ -32,4 +32,11 @@ const splitInput = (input) => {
 	return input.value.split(' ');
 };
 
-export { getRandomPositiveInteger, getRandomElement, generateId, isEscKey, splitInput };
+//@ функция, проверяющая, что есть инпуты в фокусе
+const checkInputsFocus = () => {
+	if (document.activeElement.classList.contains('text__hashtags') || document.activeElement.tagName == 'TEXTAREA') {
+		return true;
+	}
+};
+
+export { getRandomPositiveInteger, getRandomElement, generateId, isEscKey, splitInput, checkInputsFocus };

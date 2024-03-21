@@ -3,6 +3,7 @@ import { splitInput } from "./util.js";
 const formElement = document.querySelector('.img-upload__form');
 
 /*?// ?------------ |> Pristine is not defined? |>------------? //?*/
+// eslint-disable-next-line no-undef
 const pristine = new Pristine(formElement, {
 	classTo: 'img-upload__field-wrapper',
 	errorClass: 'img-upload__field-wrapper--invalid',

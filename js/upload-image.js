@@ -1,4 +1,4 @@
-import { isEscKey } from "./util.js";
+	import { isEscKey, checkInputsFocus } from "./util.js";
 import { formElement, onFormSubmit } from "./validate-form.js";
 
 const uploadImgInputElement = document.querySelector('.img-upload__input');
@@ -29,6 +29,9 @@ const closeUploadOverlay = () => {
 
 	//# отправка формы
 	formElement.removeEventListener('submit', onFormSubmit);
+
+	//# сброс значения поля выбора файла
+	uploadImgInputElement.value = null;
 };
 
 //# обработчик нажатия на крестик
@@ -38,7 +41,7 @@ const onCloseButtonClick = () => {
 
 //# обработчик нажатия на кнопку ESC
 const onWindowKeydown = (evt) => {
-	if (isEscKey(evt)) {
+	if (isEscKey(evt) && !checkInputsFocus()) {
 		closeUploadOverlay();
 	}
 };
@@ -49,4 +52,3 @@ const onUploadImgInputElementClick = () => {
 };
 
 uploadImgInputElement.addEventListener('change', onUploadImgInputElementClick);
-
