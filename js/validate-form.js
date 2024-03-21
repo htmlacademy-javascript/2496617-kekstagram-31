@@ -1,5 +1,6 @@
 import { splitInput } from "./util.js";
 import { closeUploadOverlay } from "./upload-image.js";
+import { successMessageElement, errorMessageElement } from "./success-and-error-messages.js";
 
 const formElement = document.querySelector('.img-upload__form');
 
@@ -61,7 +62,6 @@ pristine.addValidator(
 	validateHashtagsDuplicates,
 	'хэштеги не должны повторяться'
 );
-// $-------------------------------------------------------------------$ //
 
 
 // $------------------------ валидация комментария ------------------------$ //
@@ -81,30 +81,9 @@ pristine.addValidator(
 	'комментарий должен быть не более 140 символов'
 );
 
+
 // $------------------------ отправка формы ------------------------$ //
 
-//# сообщение об успешной отправке
-const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-const successMessageElement = successMessageTemplate.cloneNode(true);
-const closeSuccessMessageButton = successMessageElement.querySelector('.success__button');
-
-//# обработчик нажатия на кнопку закрытия сообщения об успешной отправке
-const onCloseSuccessMessageButtonClick = () => {
-	successMessageElement.remove();
-};
-
-closeSuccessMessageButton.addEventListener('click', onCloseSuccessMessageButtonClick);
-
-//# сообщение об ошибке отправки
-const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
-const errorMessageElement = errorMessageTemplate.cloneNode(true);
-const closeErrorMessageButton = errorMessageElement.querySelector('.error__button');
-
-//# обработчик нажатия на кнопку закрытия сообщения об ошибке отправки
-const onCloseErrorMessageButtonClick = () => {
-	errorMessageElement.remove();
-};
-closeErrorMessageButton.addEventListener('click', onCloseErrorMessageButtonClick);
 
 //# обработчик отправки формы
 const onFormSubmit = (evt) => {
@@ -120,7 +99,7 @@ const onFormSubmit = (evt) => {
 		// console.log('форма не валидна');
 	}
 };
-// назначение обработчика в модуле upload-image.js
+/// назначение обработчика в модуле upload-image.js
 
 
 //? при отправке валидной формы переходит на страницу, где написано ошибка 
