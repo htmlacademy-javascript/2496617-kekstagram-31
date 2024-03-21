@@ -3,7 +3,8 @@ import { closeUploadOverlay } from "./upload-image.js";
 
 const formElement = document.querySelector('.img-upload__form');
 
-/*?// ?------------ |> Pristine is not defined? |>------------? //?*/
+// ?------------ |> Pristine is not defined? |>------------? //
+// eslint-disable-next-line no-undef
 // eslint-disable-next-line no-undef
 const pristine = new Pristine(formElement, {
 	classTo: 'img-upload__field-wrapper',
@@ -13,7 +14,6 @@ const pristine = new Pristine(formElement, {
 	errorTextTag: 'div',
 	errorTextClass: 'img-upload__field-wrapper--error'
 });
-
 
 
 // $------------------------ валидация хэштегов ------------------------$ //
@@ -62,6 +62,8 @@ pristine.addValidator(
 	validateHashtagsDuplicates,
 	'хэштеги не должны повторяться'
 );
+// $-------------------------------------------------------------------$ //
+
 
 // $------------------------ валидация комментария ------------------------$ //
 const commentInputElement = document.querySelector('.text__description');
@@ -108,7 +110,7 @@ closeErrorMessageButton.addEventListener('click', onCloseErrorMessageButtonClick
 //# обработчик отправки формы
 const onFormSubmit = (evt) => {
 	const isValid = pristine.validate();
-	
+
 	if (isValid) {
 		// console.log('можно отправлять');
 		document.body.append(successMessageElement);
@@ -119,10 +121,14 @@ const onFormSubmit = (evt) => {
 		// console.log('форма не валидна');
 	}
 };
+// назначение обработчика в модуле upload-image.js
+
+// &------------------------ EXPORT ------------------------& //
 
 
+export {formElement, onFormSubmit}
 
-//? при отправке валидной формы переходит на страницу, где написано ошибка
+//? при отправке валидной формы переходит на страницу, где написано ошибка 
 
 
 // &------------------------ EXPORT ------------------------& //

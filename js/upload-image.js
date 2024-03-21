@@ -1,5 +1,11 @@
-import { isEscKey, checkInputsFocus } from "./util.js";
-import { formElement, onFormSubmit, pristine } from "./validate-form.js";
+import { isEscKey } from "./util.js";
+import { formElement, onFormSubmit } from "./validate-form.js";
+import { effectsListElement, onEffectsListElementChange } from './edit-image.js';
+import { scaleElement, onScaleElementClick } from './edit-image.js';
+
+
+// $======================== UPLOAD IMAGE ========================$ //
+// $======================== UPLOAD IMAGE ========================$ //
 
 const uploadImgInputElement = document.querySelector('.img-upload__input');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
@@ -16,6 +22,13 @@ const openUploadOverlay = () => {
 
 	//# отправка формы
 	formElement.addEventListener('submit', onFormSubmit);
+
+	//# настройка размера картинки
+	scaleElement.addEventListener('click', onScaleElementClick);
+
+	//# настройка фильтров
+	effectsListElement.addEventListener('change', onEffectsListElementChange);
+
 };
 
 //@ функция, закрывающая форму загрузки и обработки изображения
@@ -29,6 +42,12 @@ const closeUploadOverlay = () => {
 
 	//# отправка формы
 	formElement.removeEventListener('submit', onFormSubmit);
+
+	//# настройка размера картинки
+	scaleElement.removeEventListener('click', onScaleElementClick);
+
+	//# настройка фильтров
+	effectsListElement.removeEventListener('change', onEffectsListElementChange);
 
 	//# сброс значения поля выбора файла
 	uploadImgInputElement.value = null;
@@ -50,11 +69,10 @@ const onWindowKeydown = (evt) => {
 };
 
 //# обработчик нажатия на кнопку "Загрузить фото"
-const onUploadImgInputElementClick = () => {
+const onUploadImgInputElementChange = () => {
 	openUploadOverlay();
 };
 
-uploadImgInputElement.addEventListener('change', onUploadImgInputElementClick);
-
-// &------------------------ EXPORT ------------------------& //
+//# загрузка фото
+uploadImgInputElement.addEventListener('change', onUploadImgInputElementChange);// &------------------------ EXPORT ------------------------& //
 export { closeUploadOverlay };
