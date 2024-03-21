@@ -1,39 +1,32 @@
-//# сообщение об успешной отправке
-const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
-const successMessageElement = successMessageTemplate.cloneNode(true);
-const closeSuccessMessageButton = successMessageElement.querySelector('.success__button');
+//@ функция, создающая сообщение об успешной отправке или ошибке
+const createMessage = (name) => {
+	const messageTemplate = document.querySelector(`#${name}`).content.querySelector(`.${name}`);
+	const messageElement = messageTemplate.cloneNode(true);
+	const closeMessageButton = messageElement.querySelector('button');
 
-//# обработчик нажатия на кнопку закрытия сообщения об успешной отправке
-const onCloseSuccessMessageButtonClick = () => {
-	successMessageElement.remove();
+	const onCloseMessageButtonClick = () => {
+		messageElement.remove();
+	};
+
+	closeMessageButton.addEventListener('click', onCloseMessageButtonClick);
+
+	messageElement.addEventListener('click', onOverlayMessageClick);
+
+	return messageElement;
 };
 
-closeSuccessMessageButton.addEventListener('click', onCloseSuccessMessageButtonClick);
-
-//# сообщение об ошибке отправки
-const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
-const errorMessageElement = errorMessageTemplate.cloneNode(true);
-const closeErrorMessageButton = errorMessageElement.querySelector('.error__button');
-
-//# обработчик нажатия на кнопку закрытия сообщения об ошибке отправки
-const onCloseErrorMessageButtonClick = () => {
-	errorMessageElement.remove();
-};
-closeErrorMessageButton.addEventListener('click', onCloseErrorMessageButtonClick);
-/// обработчики можно не удалять (как я понял), так как удаляются элементы
-
-//# обработчик нажатия на документ за пределами блока с сообщением
-const onAlertMessageClick = (evt) => {
-	if (evt.target.classList.contains('success')) {
+//# обработчик нажатия на оверлэй сообщения за пределами блока с сообщением
+const onOverlayMessageClick = (evt) => {
+	if (evt.target.classList.contains('success') || evt.target.classList.contains('error')) {
 		successMessageElement.remove();
-		document.removeEventListener('click', onAlertMessageClick);
-	}
-	if (evt.target.classList.contains('error')) {
 		errorMessageElement.remove();
-		document.removeEventListener('click', onAlertMessageClick);
 	}
 };
-document.addEventListener('click', onAlertMessageClick);
+
+const successMessageElement = createMessage('success');
+const errorMessageElement = createMessage('error');
+
+/// обработчики можно не удалять (как я понял), так как удаляются элементы вместе с обработчиками
 
 // &------------------------ EXPORT ------------------------& //
-export {successMessageElement, errorMessageElement, }
+export { createMessage };
