@@ -5,7 +5,6 @@ const formElement = document.querySelector('.img-upload__form');
 
 // ?------------ |> Pristine is not defined? |>------------? //
 // eslint-disable-next-line no-undef
-// eslint-disable-next-line no-undef
 const pristine = new Pristine(formElement, {
 	classTo: 'img-upload__field-wrapper',
 	errorClass: 'img-upload__field-wrapper--invalid',
@@ -123,10 +122,6 @@ const onFormSubmit = (evt) => {
 };
 // назначение обработчика в модуле upload-image.js
 
-// &------------------------ EXPORT ------------------------& //
-
-
-export {formElement, onFormSubmit}
 
 //? при отправке валидной формы переходит на страницу, где написано ошибка 
 

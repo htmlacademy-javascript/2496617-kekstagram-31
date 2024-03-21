@@ -1,5 +1,5 @@
-import { isEscKey } from "./util.js";
-import { formElement, onFormSubmit } from "./validate-form.js";
+import { isEscKey, checkInputsFocus } from "./util.js";
+import { formElement, onFormSubmit, pristine } from "./validate-form.js";
 import { effectsListElement, onEffectsListElementChange } from './edit-image.js';
 import { scaleElement, onScaleElementClick } from './edit-image.js';
 
@@ -74,5 +74,8 @@ const onUploadImgInputElementChange = () => {
 };
 
 //# загрузка фото
-uploadImgInputElement.addEventListener('change', onUploadImgInputElementChange);// &------------------------ EXPORT ------------------------& //
+uploadImgInputElement.addEventListener('change', onUploadImgInputElementChange);
+
+
+// &------------------------ EXPORT ------------------------& //
 export { closeUploadOverlay };
