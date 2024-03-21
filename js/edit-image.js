@@ -75,7 +75,7 @@ const FILTERS = [
 	{
 		id: 'effect-phobos',
 		cssProperty: 'blur',
-		min: 1,
+		min: 0,
 		max: 3,
 		step: 0.1,
 		decimals: 1,
@@ -168,8 +168,8 @@ const adjustEffect = (cssProperty, minValue, maxValue, stepValue, decimals) => {
 const onEffectsListElementChange = (evt) => {
 	const checkedInput = evt.target;
 	if (checkedInput.tagName == 'INPUT') {
-		const { cssProperty, min, max, step, decimals, isSliderVisible } = filterEffectsMap.get(checkedInput.id);
-		adjustEffect(cssProperty, min, max, step, decimals, isSliderVisible);
+		const { cssProperty, min, max, step, decimals } = filterEffectsMap.get(checkedInput.id);
+		adjustEffect(cssProperty, min, max, step, decimals);
 	}
 };
 // назначение обработчика в модуле upload-image.js
