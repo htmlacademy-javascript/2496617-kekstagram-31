@@ -1,6 +1,6 @@
 import { splitInput } from "./util.js";
 import { closeUploadOverlay } from "./upload-image.js";
-import { successMessageElement, errorMessageElement } from "./success-and-error-messages.js";
+import { createMessage } from "./success-and-error-messages.js";
 
 const formElement = document.querySelector('.img-upload__form');
 
@@ -91,11 +91,11 @@ const onFormSubmit = (evt) => {
 
 	if (isValid) {
 		// console.log('можно отправлять');
-		document.body.append(successMessageElement);
+		document.body.append(createMessage('success'));
 		closeUploadOverlay();
 	} else {
 		evt.preventDefault();
-		document.body.append(errorMessageElement);
+		document.body.append(createMessage('error'));
 		// console.log('форма не валидна');
 	}
 };
