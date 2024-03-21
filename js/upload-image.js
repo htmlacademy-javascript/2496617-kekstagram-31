@@ -1,5 +1,5 @@
-	import { isEscKey, checkInputsFocus } from "./util.js";
-import { formElement, onFormSubmit } from "./validate-form.js";
+import { isEscKey, checkInputsFocus } from "./util.js";
+import { formElement, onFormSubmit, pristine } from "./validate-form.js";
 
 const uploadImgInputElement = document.querySelector('.img-upload__input');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
@@ -32,6 +32,9 @@ const closeUploadOverlay = () => {
 
 	//# сброс значения поля выбора файла
 	uploadImgInputElement.value = null;
+
+	//# удаление сообщений-ошибок
+	pristine.reset();
 };
 
 //# обработчик нажатия на крестик
@@ -52,3 +55,6 @@ const onUploadImgInputElementClick = () => {
 };
 
 uploadImgInputElement.addEventListener('change', onUploadImgInputElementClick);
+
+// &------------------------ EXPORT ------------------------& //
+export { closeUploadOverlay };
