@@ -41,7 +41,7 @@ const openUploadOverlay = () => {
 };
 
 //@ функция, закрывающая форму загрузки и обработки изображения
-const closeUploadOverlay = () => {
+function closeUploadOverlay() {
   uploadOverlayElement.classList.add('hidden');
 
   closeButton.removeEventListener('click', onCloseButtonClick);
@@ -64,7 +64,7 @@ const closeUploadOverlay = () => {
   //# удаление сообщений-ошибок
   pristine.reset();
 
-};
+}
 
 //# обработчик нажатия на кнопку 'Загрузить фото'
 const onUploadImgInputElementChange = () => {

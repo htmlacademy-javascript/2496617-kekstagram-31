@@ -25,7 +25,7 @@ const onShowMoreCommentsButtonClick = function () {
 };
 
 //@ функция, открывающая модальное окно
-const openModal = () => {
+function openModal() {
   modalElement.classList.remove('hidden');
 
   closeButtonElement.addEventListener('click', onCloseButtonElementClick);
@@ -34,10 +34,10 @@ const openModal = () => {
   document.body.classList.add('modal-open');
 
   showMoreCommentsButton.addEventListener('click', onShowMoreCommentsButtonClick);
-};
+}
 
 //@ функция, закрывающая модальное окно
-const closeModal = () => {
+function closeModal() {
   modalElement.classList.add('hidden');
 
   closeButtonElement.removeEventListener('click', onCloseButtonElementClick);
@@ -46,7 +46,7 @@ const closeModal = () => {
   document.body.classList.remove('modal-open');
 
   showMoreCommentsButton.removeEventListener('click', onShowMoreCommentsButtonClick);
-};
+}
 
 //# обработчик открывает модальное окно при клике на контейнер с картинками
 const onPicturesContainerElementClick = (evt) => {
