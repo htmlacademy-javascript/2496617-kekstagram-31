@@ -14,7 +14,7 @@ const openUploadOverlay = () => {
 	uploadOverlayElement.classList.remove('hidden');
 
 	closeButton.addEventListener('click', onCloseButtonClick);
-	window.addEventListener('keydown', onWindowKeydown);
+	document.addEventListener('keydown', onDocumentKeydown);
 
 	document.body.classList.add('modal-open');
 
@@ -33,7 +33,7 @@ const closeUploadOverlay = () => {
 	uploadOverlayElement.classList.add('hidden');
 
 	closeButton.removeEventListener('click', onCloseButtonClick);
-	window.removeEventListener('keydown', onWindowKeydown);
+	document.removeEventListener('keydown', onDocumentKeydown);
 
 	document.body.classList.remove('modal-open');
 
@@ -60,7 +60,7 @@ const onCloseButtonClick = () => {
 };
 
 //# обработчик нажатия на кнопку ESC
-const onWindowKeydown = (evt) => {
+const onDocumentKeydown = (evt) => {
 	if (isEscKey(evt) && !checkInputsFocus()) {
 		closeUploadOverlay();
 	}
