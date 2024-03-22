@@ -1,5 +1,5 @@
-import { isEscKey, checkInputsFocus } from "./util.js";
-import { formElement, onFormSubmit, pristine } from "./validate-form.js";
+import { isEscKey, checkInputsFocus } from './util.js';
+import { formElement, onFormSubmit, pristine } from './validate-form.js';
 import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick } from './edit-image.js';
 
 // $======================== UPLOAD IMAGE ========================$ //
@@ -11,64 +11,64 @@ const closeButton = uploadOverlayElement.querySelector('.img-upload__cancel');
 
 //@ функция, открывающая форму загрузки и обработки изображения
 const openUploadOverlay = () => {
-	uploadOverlayElement.classList.remove('hidden');
+  uploadOverlayElement.classList.remove('hidden');
 
-	closeButton.addEventListener('click', onCloseButtonClick);
-	document.addEventListener('keydown', onDocumentKeydown);
+  closeButton.addEventListener('click', onCloseButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
 
-	document.body.classList.add('modal-open');
+  document.body.classList.add('modal-open');
 
-	//# отправка формы
-	formElement.addEventListener('submit', onFormSubmit);
+  //# отправка формы
+  formElement.addEventListener('submit', onFormSubmit);
 
-	//# настройка размера картинки
-	scaleElement.addEventListener('click', onScaleElementClick);
+  //# настройка размера картинки
+  scaleElement.addEventListener('click', onScaleElementClick);
 
-	//# настройка фильтров
-	effectsListElement.addEventListener('change', onEffectsListElementChange);
+  //# настройка фильтров
+  effectsListElement.addEventListener('change', onEffectsListElementChange);
 };
 
 //@ функция, закрывающая форму загрузки и обработки изображения
 const closeUploadOverlay = () => {
-	uploadOverlayElement.classList.add('hidden');
+  uploadOverlayElement.classList.add('hidden');
 
-	closeButton.removeEventListener('click', onCloseButtonClick);
-	document.removeEventListener('keydown', onDocumentKeydown);
+  closeButton.removeEventListener('click', onCloseButtonClick);
+  document.removeEventListener('keydown', onDocumentKeydown);
 
-	document.body.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
 
-	//# отправка формы
-	formElement.removeEventListener('submit', onFormSubmit);
+  //# отправка формы
+  formElement.removeEventListener('submit', onFormSubmit);
 
-	//# настройка размера картинки
-	scaleElement.removeEventListener('click', onScaleElementClick);
+  //# настройка размера картинки
+  scaleElement.removeEventListener('click', onScaleElementClick);
 
-	//# настройка фильтров
-	effectsListElement.removeEventListener('change', onEffectsListElementChange);
+  //# настройка фильтров
+  effectsListElement.removeEventListener('change', onEffectsListElementChange);
 
-	//# сброс значения поля выбора файла
-	uploadImgInputElement.value = null;
+  //# сброс значения поля выбора файла
+  uploadImgInputElement.value = null;
 
-	//# удаление сообщений-ошибок
-	pristine.reset();
+  //# удаление сообщений-ошибок
+  pristine.reset();
 
 };
 
 //# обработчик нажатия на крестик
 const onCloseButtonClick = () => {
-	closeUploadOverlay();
+  closeUploadOverlay();
 };
 
 //# обработчик нажатия на кнопку ESC
 const onDocumentKeydown = (evt) => {
-	if (isEscKey(evt) && !checkInputsFocus()) {
-		closeUploadOverlay();
-	}
+  if (isEscKey(evt) && !checkInputsFocus()) {
+    closeUploadOverlay();
+  }
 };
 
-//# обработчик нажатия на кнопку "Загрузить фото"
+//# обработчик нажатия на кнопку 'Загрузить фото'
 const onUploadImgInputElementChange = () => {
-	openUploadOverlay();
+  openUploadOverlay();
 };
 
 //# загрузка фото

@@ -1,18 +1,16 @@
-import { splitInput } from "./util.js";
-import { closeUploadOverlay } from "./upload-image.js";
-import { createMessage } from "./success-and-error-messages.js";
+import { splitInput } from './util.js';
+import { closeUploadOverlay } from './upload-image.js';
+import { createMessage } from './success-and-error-messages.js';
 
 const formElement = document.querySelector('.img-upload__form');
 
-// ?------------ |> Pristine is not defined? |>------------? //
-// eslint-disable-next-line no-undef
 const pristine = new Pristine(formElement, {
-	classTo: 'img-upload__field-wrapper',
-	errorClass: 'img-upload__field-wrapper--invalid',
-	successClass: 'img-upload__field-wrapper--valid',
-	errorTextParent: 'img-upload__field-wrapper',
-	errorTextTag: 'div',
-	errorTextClass: 'img-upload__field-wrapper--error'
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__field-wrapper--invalid',
+  successClass: 'img-upload__field-wrapper--valid',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'div',
+  errorTextClass: 'img-upload__field-wrapper--error'
 });
 
 
@@ -25,42 +23,41 @@ const validateHashtag = (hashtag) => hashtagRegExp.test(hashtag);
 
 //@ функция, проверяющая хэштеги на формат
 const validateHashtagsFormat = () => {
-	if (hashtagInputElement.value != '') {
-		const isEveryHashtagValid = splitInput(hashtagInputElement).every(hashtagElem => validateHashtag(hashtagElem));
-		return isEveryHashtagValid;
-	}
-	return true;
+  if (hashtagInputElement.value !== '') {
+    const isEveryHashtagValid = splitInput(hashtagInputElement).every((hashtagElem) => validateHashtag(hashtagElem));
+    return isEveryHashtagValid;
+  }
+  return true;
 };
 
 //@ функция, проверяющая хэштеги на количество
 const validateHashtagsAmount = () =>
-	hashtagInputElement.value == '' || splitInput(hashtagInputElement).length <= 5;
+  hashtagInputElement.value === '' || splitInput(hashtagInputElement).length <= 5;
 
 
 //@ функция, проверяющая повторы хэштегов
 const validateHashtagsDuplicates = () =>
-	new Set(splitInput(hashtagInputElement)).size == splitInput(hashtagInputElement).length;
-
+  new Set(splitInput(hashtagInputElement)).size === splitInput(hashtagInputElement).length;
 
 
 //# валидация формата хэштегов
 pristine.addValidator(
-	hashtagInputElement,
-	validateHashtagsFormat,
-	'хэштег должен начинаться с символа # и быть не более 20 символов'
+  hashtagInputElement,
+  validateHashtagsFormat,
+  'хэштег должен начинаться с символа # и быть не более 20 символов'
 );
 
 //# валидация количества хэштегов
 pristine.addValidator(
-	hashtagInputElement,
-	validateHashtagsAmount,
-	'количество хэштегов должно быть не более 5'
+  hashtagInputElement,
+  validateHashtagsAmount,
+  'количество хэштегов должно быть не более 5'
 );
 //# валидация повтора хэштегов
 pristine.addValidator(
-	hashtagInputElement,
-	validateHashtagsDuplicates,
-	'хэштеги не должны повторяться'
+  hashtagInputElement,
+  validateHashtagsDuplicates,
+  'хэштеги не должны повторяться'
 );
 
 
@@ -68,17 +65,17 @@ pristine.addValidator(
 const commentInputElement = document.querySelector('.text__description');
 //@ функция, проверяющая поле комментария на валидность
 const validateCommentInput = () => {
-	if (commentInputElement.value == '' || commentInputElement.value.length <= 140) {
-		return true;
-	}
-	return false;
+  if (commentInputElement.value === '' || commentInputElement.value.length <= 140) {
+    return true;
+  }
+  return false;
 };
 
 //# валидация инпута комментария
 pristine.addValidator(
-	commentInputElement,
-	validateCommentInput,
-	'комментарий должен быть не более 140 символов'
+  commentInputElement,
+  validateCommentInput,
+  'комментарий должен быть не более 140 символов'
 );
 
 
@@ -87,22 +84,22 @@ pristine.addValidator(
 
 //# обработчик отправки формы
 const onFormSubmit = (evt) => {
-	const isValid = pristine.validate();
+  const isValid = pristine.validate();
 
-	if (isValid) {
-		// console.log('можно отправлять');
-		document.body.append(createMessage('success'));
-		closeUploadOverlay();
-	} else {
-		evt.preventDefault();
-		document.body.append(createMessage('error'));
-		// console.log('форма не валидна');
-	}
+  if (isValid) {
+    // console.log('можно отправлять');
+    document.body.append(createMessage('success'));
+    closeUploadOverlay();
+  } else {
+    evt.preventDefault();
+    document.body.append(createMessage('error'));
+    // console.log('форма не валидна');
+  }
 };
 /// назначение обработчика в модуле upload-image.js
 
 
-//? при отправке валидной формы переходит на страницу, где написано ошибка 
+//? при отправке валидной формы переходит на страницу, где написано ошибка
 
 
 // &------------------------ EXPORT ------------------------& //
