@@ -9,6 +9,18 @@ const uploadImgInputElement = document.querySelector('.img-upload__input');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const closeButton = uploadOverlayElement.querySelector('.img-upload__cancel');
 
+//# обработчик нажатия на крестик
+const onCloseButtonClick = () => {
+  closeUploadOverlay();
+};
+
+//# обработчик нажатия на кнопку ESC
+const onDocumentKeydown = (evt) => {
+  if (isEscKey(evt) && !checkInputsFocus()) {
+    closeUploadOverlay();
+  }
+};
+
 //@ функция, открывающая форму загрузки и обработки изображения
 const openUploadOverlay = () => {
   uploadOverlayElement.classList.remove('hidden');
@@ -52,18 +64,6 @@ const closeUploadOverlay = () => {
   //# удаление сообщений-ошибок
   pristine.reset();
 
-};
-
-//# обработчик нажатия на крестик
-const onCloseButtonClick = () => {
-  closeUploadOverlay();
-};
-
-//# обработчик нажатия на кнопку ESC
-const onDocumentKeydown = (evt) => {
-  if (isEscKey(evt) && !checkInputsFocus()) {
-    closeUploadOverlay();
-  }
 };
 
 //# обработчик нажатия на кнопку 'Загрузить фото'

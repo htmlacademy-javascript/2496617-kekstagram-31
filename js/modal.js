@@ -6,18 +6,10 @@ const modalElement = document.querySelector('.big-picture');
 const closeButtonElement = modalElement.querySelector('.big-picture__cancel');
 const showMoreCommentsButton = modalElement.querySelector('.social__comments-loader');
 
-
-//# обработчик открывает модальное окно при клике на контейнер с картинками
-const onPicturesContainerElementClick = (evt) => {
-  const clickedPicture = evt.target.closest('.picture');
-
-  if (clickedPicture) {
-    fillModal(clickedPicture, modalElement, showMoreCommentsButton);
-    openModal();
-  }
+//# обработчик закрывает модальное окно при клике на крестик
+const onCloseButtonElementClick = () => {
+  closeModal();
 };
-
-picturesContainerElement.addEventListener('click', onPicturesContainerElementClick);
 
 //# обработчик закрывает модальное окно при нажатии на ESC
 const onEscKeydown = (evt) => {
@@ -30,11 +22,6 @@ const onEscKeydown = (evt) => {
 const onShowMoreCommentsButtonClick = function () {
   showComments();
   matchShownCommentsNumber(this);
-};
-
-//# обработчик закрывает модальное окно при клике на крестик
-const onCloseButtonElementClick = () => {
-  closeModal();
 };
 
 //@ функция, открывающая модальное окно
@@ -60,3 +47,15 @@ const closeModal = () => {
 
   showMoreCommentsButton.removeEventListener('click', onShowMoreCommentsButtonClick);
 };
+
+//# обработчик открывает модальное окно при клике на контейнер с картинками
+const onPicturesContainerElementClick = (evt) => {
+  const clickedPicture = evt.target.closest('.picture');
+
+  if (clickedPicture) {
+    fillModal(clickedPicture, modalElement, showMoreCommentsButton);
+    openModal();
+  }
+};
+
+picturesContainerElement.addEventListener('click', onPicturesContainerElementClick);
