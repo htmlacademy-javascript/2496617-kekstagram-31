@@ -1,4 +1,4 @@
-// import { picturesArray } from './data.js';
+import { pictures } from './api.js';
 
 //# шаблон миниатюры
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -7,12 +7,12 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const picturesListElement = document.querySelector('.pictures');
 
 //@ функция, отрисовывающая миниатюры
-const renderThumbnails = (pictures) => {
+const renderThumbnails = (picturesArr) => {
   //# фрагмент
   const picturesListFragment = document.createDocumentFragment();
 
   //# присвоение данных в шаблон миниатюр
-  pictures.forEach(
+  picturesArr.forEach(
     ({ id, url, description, likes, comments }) => {
       const pictureElement = pictureTemplate.cloneNode(true);
       pictureElement.querySelector('.picture__img').src = url;
@@ -30,4 +30,4 @@ const renderThumbnails = (pictures) => {
   picturesListElement.append(picturesListFragment);
 };
 
-export { renderThumbnails };
+renderThumbnails(pictures);

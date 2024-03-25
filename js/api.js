@@ -1,10 +1,6 @@
-//# получение данных для отрисовки картинок
+//# получение данных для отрисовки миниатюр
 
-import { renderThumbnails } from './render-thumbnails.js';
+const pictures = await fetch('https://31.javascript.htmlacademy.pro/kekstagram/data')
+  .then((response) => response.json());
 
-fetch('https://31.javascript.htmlacademy.pro/kekstagram/data')
-  .then((response) => response.json())
-  .then((pictures) => {
-    renderThumbnails(pictures);
-  });
-
+export { pictures };
