@@ -1,4 +1,5 @@
-import { picturesArray } from './data.js';
+// $======================== FILL MODAL ========================$ //
+// $======================== FILL MODAL ========================$ //
 
 //# максимальное количество показываемых комментариев
 const MAX_SHOWN_COMMENTS_AMOUNT = 5;
@@ -24,11 +25,6 @@ const createComment = (src, name, message) => {
   return comment;
 };
 
-// создание коллекции Map из массива объектов-фотографий, в которой элементы - это массивы пар [id - (сам)объект]
-const picturesMap = picturesArray.reduce((map, pictureObject) => {
-  map.set(pictureObject.id, pictureObject);
-  return map;
-}, new Map());
 
 //@ функция, скрывающая все комментарии
 const hideAllComments = (modalElement) => {
@@ -70,6 +66,12 @@ const matchShownCommentsNumber = (ButtonItself) => {
 
   toggleShowMoreCommentsButtonVisibility(totalCommentsArray.length, shownCommentsArray.length, ButtonItself);
 };
+
+// # коллекция Map из массива объектов-фотографий, в которой элементы - это массивы пар [id - (сам)объект]
+const picturesMap = pictures.reduce((map, pictureObject) => {
+  map.set(pictureObject.id, pictureObject);
+  return map;
+}, new Map());
 
 //@ функция, наполняющая модальное окно
 const fillModal = (clickedPicture, modalElement, showMoreCommentsButton) => {

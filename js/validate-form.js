@@ -84,6 +84,8 @@ pristine.addValidator(
 
 //# обработчик отправки формы
 const onFormSubmit = (evt) => {
+  evt.preventDefault();
+
   const isValid = pristine.validate();
 
   if (isValid) {
@@ -91,15 +93,11 @@ const onFormSubmit = (evt) => {
     document.body.append(createMessage('success'));
     closeUploadOverlay();
   } else {
-    evt.preventDefault();
     document.body.append(createMessage('error'));
     // console.log('форма не валидна');
   }
 };
 /// назначение обработчика в модуле upload-image.js
-
-
-//? при отправке валидной формы переходит на страницу, где написано ошибка
 
 
 // &------------------------ EXPORT ------------------------& //

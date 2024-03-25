@@ -1,6 +1,9 @@
 import { isEscKey } from './util.js';
 import { fillModal, showComments, matchShownCommentsNumber } from './fill-modal.js';
 
+// $======================== OPEN/CLOSE MODAL ========================$ //
+// $======================== OPEN/CLOSE MODAL ========================$ //
+
 const picturesContainerElement = document.querySelector('.pictures');
 const modalElement = document.querySelector('.big-picture');
 const closeButtonElement = modalElement.querySelector('.big-picture__cancel');
