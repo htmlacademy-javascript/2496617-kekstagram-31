@@ -1,5 +1,3 @@
-import { pictures } from './api.js';
-
 // $======================== FILL MODAL ========================$ //
 // $======================== FILL MODAL ========================$ //
 
@@ -26,7 +24,6 @@ const createComment = (src, name, message) => {
 
   return comment;
 };
-
 
 //@ функция, скрывающая все комментарии
 const hideAllComments = (modalElement) => {
@@ -69,14 +66,15 @@ const matchShownCommentsNumber = (ButtonItself) => {
   toggleShowMoreCommentsButtonVisibility(totalCommentsArray.length, shownCommentsArray.length, ButtonItself);
 };
 
-// # коллекция Map из массива объектов-фотографий, в которой элементы - это массивы пар [id - (сам)объект]
-const picturesMap = pictures.reduce((map, pictureObject) => {
-  map.set(pictureObject.id, pictureObject);
-  return map;
-}, new Map());
 
 //@ функция, наполняющая модальное окно
-const fillModal = (clickedPicture, modalElement, showMoreCommentsButton) => {
+const fillModal = (clickedPicture, modalElement, pictures, showMoreCommentsButton) => {
+
+  // # коллекция Map из массива объектов-фотографий, в которой элементы - это массивы пар [id - (сам)объект]
+  const picturesMap = pictures.reduce((map, pictureObject) => {
+    map.set(pictureObject.id, pictureObject);
+    return map;
+  }, new Map());
 
   const { url, likes, comments, description } = picturesMap.get(Number(clickedPicture.id));
 

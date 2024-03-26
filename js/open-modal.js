@@ -1,10 +1,11 @@
+import { pictures } from './api.js';
 import { isEscKey } from './util.js';
 import { fillModal, showComments, matchShownCommentsNumber } from './fill-modal.js';
 
 // $======================== OPEN/CLOSE MODAL ========================$ //
 // $======================== OPEN/CLOSE MODAL ========================$ //
 
-const picturesContainerElement = document.querySelector('.pictures');
+const thumbnailsContainerElement = document.querySelector('.pictures');
 const modalElement = document.querySelector('.big-picture');
 const closeButtonElement = modalElement.querySelector('.big-picture__cancel');
 const showMoreCommentsButton = modalElement.querySelector('.social__comments-loader');
@@ -52,13 +53,13 @@ function closeModal() {
 }
 
 //# обработчик открывает модальное окно при клике на контейнер с картинками
-const onPicturesContainerElementClick = (evt) => {
+const onThumbnailsContainerElementClick = (evt) => {
   const clickedPicture = evt.target.closest('.picture');
 
   if (clickedPicture) {
-    fillModal(clickedPicture, modalElement, showMoreCommentsButton);
+    fillModal(clickedPicture, modalElement, pictures, showMoreCommentsButton);
     openModal();
   }
 };
 
-picturesContainerElement.addEventListener('click', onPicturesContainerElementClick);
+thumbnailsContainerElement.addEventListener('click', onThumbnailsContainerElementClick);

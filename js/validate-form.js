@@ -1,6 +1,9 @@
 import { splitInput } from './util.js';
 import { closeUploadOverlay } from './upload-image.js';
-import { createMessage } from './success-and-error-messages.js';
+import { appendMessage } from './success-and-error-messages.js';
+
+// $======================== VALIDATE FORM ========================$ //
+// $======================== VALIDATE FORM ========================$ //
 
 const formElement = document.querySelector('.img-upload__form');
 
@@ -90,10 +93,10 @@ const onFormSubmit = (evt) => {
 
   if (isValid) {
     // console.log('можно отправлять');
-    document.body.append(createMessage('success'));
+    appendMessage('success');
     closeUploadOverlay();
   } else {
-    document.body.append(createMessage('error'));
+    appendMessage('error');
     // console.log('форма не валидна');
   }
 };

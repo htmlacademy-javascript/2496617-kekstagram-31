@@ -18,7 +18,9 @@ const createMessage = (name) => {
     messageElement.remove();
   };
 
-  closeMessageButton.addEventListener('click', onCloseMessageButtonClick);
+  if (closeMessageButton) {
+    closeMessageButton.addEventListener('click', onCloseMessageButtonClick);
+  }
 
   messageElement.addEventListener('click', onOverlayMessageClick);
 
@@ -27,5 +29,17 @@ const createMessage = (name) => {
 
 /// обработчики можно не удалять (как я понял), так как удаляются элементы вместе с обработчиками
 
+//@ функция, добавляющая сообщение на страницу
+const appendMessage = (name) => {
+  const message = createMessage(name);
+  document.body.append(message);
+};
+
+//@ функция, удаляющая сообщение со страницы
+const removeMessage = (name) => {
+  document.querySelector(name).remove();
+};
+
+
 // &------------------------ EXPORT ------------------------& //
-export { createMessage };
+export { appendMessage, removeMessage };
