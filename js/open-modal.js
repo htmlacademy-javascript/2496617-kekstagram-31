@@ -16,7 +16,7 @@ const onCloseButtonElementClick = () => {
 };
 
 //# обработчик закрывает модальное окно при нажатии на ESC
-const onEscKeydown = (evt) => {
+const onDocumentKeydown = (evt) => {
   if (isEscKey(evt)) {
     closeModal();
   }
@@ -33,7 +33,7 @@ function openModal() {
   modalElement.classList.remove('hidden');
 
   closeButtonElement.addEventListener('click', onCloseButtonElementClick);
-  document.addEventListener('keydown', onEscKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
 
   document.body.classList.add('modal-open');
 
@@ -45,7 +45,7 @@ function closeModal() {
   modalElement.classList.add('hidden');
 
   closeButtonElement.removeEventListener('click', onCloseButtonElementClick);
-  document.removeEventListener('keydown', onEscKeydown);
+  document.removeEventListener('keydown', onDocumentKeydown);
 
   document.body.classList.remove('modal-open');
 

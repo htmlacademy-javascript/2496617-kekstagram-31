@@ -1,9 +1,10 @@
 import { splitInput } from './util.js';
-import { closeUploadOverlay } from './upload-image.js';
-import { appendMessage } from './success-and-error-messages.js';
+import { createMessage } from './success-and-error-messages.js';
 
 // $======================== VALIDATE FORM ========================$ //
 // $======================== VALIDATE FORM ========================$ //
+const SUCCESS_MESSAGE_CLASS = 'success';
+const ERROR_MESSAGE_CLASS = 'error';
 
 const formElement = document.querySelector('.img-upload__form');
 
@@ -84,24 +85,38 @@ pristine.addValidator(
 
 // $------------------------ отправка формы ------------------------$ //
 
+const SEND_DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+/// в параметр onSuccess будет передаваться функция closeUploadModal
+const setUploadFormSubmit = (onSuccess) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-//# обработчик отправки формы
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
 
-  const isValid = pristine.validate();
-
-  if (isValid) {
-    // console.log('можно отправлять');
-    appendMessage('success');
-    closeUploadOverlay();
-  } else {
-    appendMessage('error');
-    // console.log('форма не валидна');
-  }
+      fetch(SEND_DATA_URL,
+        {
+          method: 'POST',
+          body: formData,
+        })
+        .then((response) => {
+          if (response.ok) {
+            onSuccess();
+            document.body.append(createMessage(SUCCESS_MESSAGE_CLASS));
+            /// именно создание каждый раз сообщения нужно, чтобы можно было удалить обработчик с document
+          } else {
+            throw new Error(`${response.status} - ${response.statusText}`);
+          } //? если без блока else, то всегда идёт в catch, и появляется сообщение об ошибке
+        })
+        .catch(() => {
+          document.body.append(createMessage(ERROR_MESSAGE_CLASS));
+        });
+    }
+  });
+  //? обработчик не удалить, раз у функции есть параметр?
 };
-/// назначение обработчика в модуле upload-image.js
 
 
 // &------------------------ EXPORT ------------------------& //
-export { formElement, onFormSubmit, pristine };
+export { pristine, setUploadFormSubmit };

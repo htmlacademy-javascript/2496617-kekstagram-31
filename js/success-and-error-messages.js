@@ -1,12 +1,4 @@
-//# обработчик нажатия на оверлэй сообщения за пределами блока с сообщением
-const onOverlayMessageClick = (evt) => {
-  if (evt.target.classList.contains('success')) {
-    document.querySelector('.success').remove();
-  }
-  if (evt.target.classList.contains('error')) {
-    document.querySelector('.error').remove();
-  }
-};
+import { isEscKey } from './util.js';
 
 //@ функция, создающая сообщение об успешной отправке или ошибке
 const createMessage = (name) => {
@@ -14,9 +6,26 @@ const createMessage = (name) => {
   const messageElement = messageTemplate.cloneNode(true);
   const closeMessageButton = messageElement.querySelector('button');
 
+  //# обработчик нажатия на кнопку закрытия
   const onCloseMessageButtonClick = () => {
     messageElement.remove();
   };
+
+  //# обработчик нажатия на оверлэй сообщения за пределами блока с сообщением
+  const onOverlayMessageClick = (evt) => {
+    if (evt.target === messageElement) {
+      messageElement.remove();
+    }
+  };
+
+  //# обработчик нажатия на ESC
+  const onDocumentKeydown = (evt) => {
+    if (isEscKey(evt)) {
+      messageElement.remove();
+      document.removeEventListener('keydown', onDocumentKeydown);
+    }
+  };
+  document.addEventListener('keydown', onDocumentKeydown);
 
   if (closeMessageButton) {
     closeMessageButton.addEventListener('click', onCloseMessageButtonClick);
@@ -28,18 +37,8 @@ const createMessage = (name) => {
 };
 
 /// обработчики можно не удалять (как я понял), так как удаляются элементы вместе с обработчиками
-
-//@ функция, добавляющая сообщение на страницу
-const appendMessage = (name) => {
-  const message = createMessage(name);
-  document.body.append(message);
-};
-
-//@ функция, удаляющая сообщение со страницы
-const removeMessage = (name) => {
-  document.querySelector(name).remove();
-};
+//! document то не удаляется, нужно удалять его обработчик
 
 
 // &------------------------ EXPORT ------------------------& //
-export { appendMessage, removeMessage };
+export { createMessage };
