@@ -1,26 +1,54 @@
-import { createMessage } from './success-and-error-messages.js';
+import { showSuccessMessage, showDataErrorMessage } from './success-and-error-messages.js';
 
-//# получение данных для отрисовки миниатюр
-const DATA_ERROR_MESSAGE_CLASS = 'data-error';
-const ERROR_MESSAGE_SHOW_TIME = 5000;
-const DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/data';
+// $======================== GET AND SEND DATA ========================$ //
+// $======================== GET AND SEND DATA ========================$ //
 
-const pictures = await fetch(DATA_URL) //? если адрес неверный, то выводится ошибка в консоль, это норм?
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`${response.status} - ${response.statusText}`);
-    }
-    return response;
-  })
-  .then((response) => response.json())
-  .catch(() => {
-    document.body.append(createMessage(DATA_ERROR_MESSAGE_CLASS));
-    setTimeout(() => {
-      document.body.removeChild(createMessage(DATA_ERROR_MESSAGE_CLASS));
-    }, ERROR_MESSAGE_SHOW_TIME);
-  });
+const GET_DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram/data';
+const SEND_DATA_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
-//# отправка данных на сервер
+//@ функция, получающая данные с сервера
+const getData = (
+  // onSuccess //? эта функция не работает, как ожидается по показанному в скринкасте
+) => {
+  const data = fetch(GET_DATA_URL) //? если адрес неверный, то выводится ошибка в консоль, это норм?
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`${response.status} - ${response.statusText}`);
+      }
+      return response;
+    })
+    .then((response) => response.json())
+    // .then((dataPictures) => {
+    //   onSuccess(dataPictures);
+    // }) //? вот тут, возвращает undefined
+    .catch(() => {
+      showDataErrorMessage();
+    });
+  return data;
+};
+
+//# присвоение данных в переменную
+const pictures = await getData();
+
+//@ функция, отправляющая данные на сервер
+const sendData = (onSuccess, onFail, body) => {
+  fetch(SEND_DATA_URL,
+    {
+      method: 'POST',
+      body: body,
+    })
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+        showSuccessMessage();
+      } else {
+        throw new Error(`${response.status} - ${response.statusText}`);
+      } //? если без блока else, то всегда идёт в catch, и появляется сообщение об ошибке
+    })
+    .catch(() => {
+      onFail();
+    });
+};
 
 
-export { pictures };
+export { pictures, sendData };

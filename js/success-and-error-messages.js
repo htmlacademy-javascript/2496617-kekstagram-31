@@ -1,6 +1,16 @@
 import { isEscKey } from './util.js';
 
-//@ функция, создающая сообщение об успешной отправке или ошибке
+
+// $======================== SUCCESS AND ERROR MESSAGES ========================$ //
+// $======================== SUCCESS AND ERROR MESSAGES ========================$ //
+
+const DATA_ERROR_MESSAGE_CLASS = 'data-error';
+const SUCCESS_MESSAGE_CLASS = 'success';
+const ERROR_MESSAGE_CLASS = 'error';
+
+const ERROR_MESSAGE_SHOW_TIME = 5000;
+
+//@ функция, создающая сообщение об успешной отправке/ошибке
 const createMessage = (name) => {
   const messageTemplate = document.querySelector(`#${name}`).content.querySelector(`.${name}`);
   const messageElement = messageTemplate.cloneNode(true);
@@ -36,9 +46,26 @@ const createMessage = (name) => {
   return messageElement;
 };
 
-/// обработчики можно не удалять (как я понял), так как удаляются элементы вместе с обработчиками
-//! document то не удаляется, нужно удалять его обработчик
-
+//@ функция, показывающая сообщение об успешной отправке
+const showSuccessMessage = () => {
+  document.body.append(createMessage(SUCCESS_MESSAGE_CLASS));
+};
+//@ функция, показывающая сообщение об ошибке отправки
+const showErrorMessage = () => {
+  const errorMessage = createMessage(ERROR_MESSAGE_CLASS);
+  document.body.append(errorMessage);
+  setTimeout(() => {
+    errorMessage.remove();
+  }, ERROR_MESSAGE_SHOW_TIME);
+};
+//@ функция, показывающая сообщение об ошибке получения данных
+const showDataErrorMessage = () => {
+  const dataErrorMessage = createMessage(DATA_ERROR_MESSAGE_CLASS);
+  document.body.append(dataErrorMessage);
+  setTimeout(() => {
+    dataErrorMessage.remove();
+  }, ERROR_MESSAGE_SHOW_TIME);
+};
 
 // &------------------------ EXPORT ------------------------& //
-export { createMessage };
+export { showSuccessMessage, showErrorMessage, showDataErrorMessage };
