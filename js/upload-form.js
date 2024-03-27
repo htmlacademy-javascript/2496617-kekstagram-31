@@ -27,8 +27,7 @@ const validateHashtag = (hashtag) => hashtagRegExp.test(hashtag);
 //@ функция, проверяющая хэштеги на формат
 const validateHashtagsFormat = () => {
   if (hashtagInputElement.value !== '') {
-    const isEveryHashtagValid = splitInput(hashtagInputElement).every((hashtagElem) => validateHashtag(hashtagElem));
-    return isEveryHashtagValid;
+    return splitInput(hashtagInputElement).every((hashtagElem) => validateHashtag(hashtagElem));
   }
   return true;
 };
