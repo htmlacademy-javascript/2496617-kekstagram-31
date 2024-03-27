@@ -1,4 +1,5 @@
 import { pictures } from './api.js';
+import { showDataErrorMessage } from './success-and-error-messages.js';
 
 // $======================== RENDER THUMBNAILS ========================$ //
 // $======================== RENDER THUMBNAILS ========================$ //
@@ -33,6 +34,8 @@ const renderThumbnails = (picturesObjects) => {
   thumbnailsListElement.append(thumbnailsListFragment);
 };
 
-if (pictures) {
+try {
   renderThumbnails(pictures);
+} catch (error) {
+  showDataErrorMessage();
 }
