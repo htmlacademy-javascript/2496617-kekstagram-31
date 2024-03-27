@@ -1,5 +1,5 @@
 import { isEscKey, checkInputsFocus } from './util.js';
-import { pristine } from './upload-form.js';
+import { pristine, setUploadFormSubmit } from './upload-form.js';
 import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick } from './edit-image.js';
 
 
@@ -68,6 +68,9 @@ function closeUploadModal() {
 
 //# загрузка фото
 uploadImgInputElement.addEventListener('change', onUploadImgInputElementChange);
+
+
+setUploadFormSubmit(closeUploadModal);
 
 
 // &------------------------ EXPORT ------------------------& //
