@@ -102,5 +102,5 @@ const fillModal = (clickedPicture, modalElement, pictures, showMoreCommentsButto
   matchShownCommentsNumber(showMoreCommentsButton);
 };
 
-
+// &------------------------ EXPORT ------------------------& //
 export { fillModal, showComments, matchShownCommentsNumber };

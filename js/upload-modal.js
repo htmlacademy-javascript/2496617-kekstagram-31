@@ -2,7 +2,6 @@ import { isEscKey, checkInputsFocus } from './util.js';
 import { pristine, setUploadFormSubmit } from './upload-form.js';
 import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick } from './edit-image.js';
 
-
 // $======================== UPLOAD MODAL ========================$ //
 // $======================== UPLOAD MODAL ========================$ //
 

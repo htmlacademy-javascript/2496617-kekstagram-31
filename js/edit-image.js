@@ -95,8 +95,6 @@ const effectValueElement = document.querySelector('.effect-level__value');
 const effectsListElement = document.querySelector('.effects__list');
 
 //# инициализация слайдера
-// ?------------ |> NOUISLIDER IS NOT DEFINED |>------------? //
-// eslint-disable-next-line no-undef
 noUiSlider.create(effectSliderElement, {
   start: 1,
   connect: 'lower',

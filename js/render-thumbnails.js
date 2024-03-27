@@ -1,5 +1,8 @@
 import { pictures } from './api.js';
 
+// $======================== RENDER THUMBNAILS ========================$ //
+// $======================== RENDER THUMBNAILS ========================$ //
+
 //# шаблон миниатюры
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 

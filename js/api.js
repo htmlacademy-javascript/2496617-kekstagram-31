@@ -53,5 +53,5 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-
+// &------------------------ EXPORT ------------------------& //
 export { pictures, sendData };

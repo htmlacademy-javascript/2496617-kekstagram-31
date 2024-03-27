@@ -37,4 +37,5 @@ const checkInputsFocus = () => {
   }
 };
 
+// &------------------------ EXPORT ------------------------& //
 export { getRandomPositiveInteger, getRandomElement, generateId, isEscKey, splitInput, checkInputsFocus };
