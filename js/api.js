@@ -35,7 +35,7 @@ const pictures = await getData();
 
 //@ функция, отправляющая данные на сервер
 const sendData = (onSuccess, onFail, body) => {
-  fetch(`${BASE_URL}${ROUTE.GET_DATA}`, //? если адрес неверный, то выводится ошибка в консоль, это норм?
+  fetch(`${BASE_URL}${ROUTE.SEND_DATA}`, //? если адрес неверный, то выводится ошибка в консоль, это норм?
     {
       method: 'POST',
       body: body,
