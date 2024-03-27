@@ -1,6 +1,5 @@
 import { isEscKey } from './util.js';
 
-
 // $======================== SUCCESS AND ERROR MESSAGES ========================$ //
 // $======================== SUCCESS AND ERROR MESSAGES ========================$ //
 
@@ -16,18 +15,6 @@ const createMessage = (name) => {
   const messageElement = messageTemplate.cloneNode(true);
   const closeMessageButton = messageElement.querySelector('button');
 
-  //# обработчик нажатия на кнопку закрытия
-  const onCloseMessageButtonClick = () => {
-    messageElement.remove();
-  };
-
-  //# обработчик нажатия на оверлэй сообщения за пределами блока с сообщением
-  const onOverlayMessageClick = (evt) => {
-    if (evt.target === messageElement) {
-      messageElement.remove();
-    }
-  };
-
   //# обработчик нажатия на ESC
   const onDocumentKeydown = (evt) => {
     if (isEscKey(evt)) {
@@ -36,6 +23,20 @@ const createMessage = (name) => {
     }
   };
   document.addEventListener('keydown', onDocumentKeydown);
+
+  //# обработчик нажатия на кнопку закрытия
+  const onCloseMessageButtonClick = () => {
+    messageElement.remove();
+    document.removeEventListener('keydown', onDocumentKeydown);
+  };
+
+  //# обработчик нажатия на оверлэй сообщения за пределами блока с сообщением
+  const onOverlayMessageClick = (evt) => {
+    if (evt.target === messageElement) {
+      messageElement.remove();
+      document.removeEventListener('keydown', onDocumentKeydown);
+    }
+  };
 
   if (closeMessageButton) {
     closeMessageButton.addEventListener('click', onCloseMessageButtonClick);
@@ -46,17 +47,14 @@ const createMessage = (name) => {
   return messageElement;
 };
 
+
 //@ функция, показывающая сообщение об успешной отправке
 const showSuccessMessage = () => {
   document.body.append(createMessage(SUCCESS_MESSAGE_CLASS));
 };
 //@ функция, показывающая сообщение об ошибке отправки
 const showErrorMessage = () => {
-  const errorMessage = createMessage(ERROR_MESSAGE_CLASS);
-  document.body.append(errorMessage);
-  setTimeout(() => {
-    errorMessage.remove();
-  }, ERROR_MESSAGE_SHOW_TIME);
+  document.body.append(createMessage(ERROR_MESSAGE_CLASS));
 };
 //@ функция, показывающая сообщение об ошибке получения данных
 const showDataErrorMessage = () => {
