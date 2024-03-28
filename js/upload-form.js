@@ -114,9 +114,8 @@ const setUploadFormSubmit = (onSuccess) => {
       );
     }
   });
-  //? обработчик не удалить, раз у функции есть параметр?
 };
 
 
 // &------------------------ EXPORT ------------------------& //
-export { pristine, setUploadFormSubmit };
+export { pristine, setUploadFormSubmit, formElement };
