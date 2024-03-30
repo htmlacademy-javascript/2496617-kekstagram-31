@@ -1,6 +1,6 @@
 import { isEscKey, checkInputsFocus } from './util.js';
-import { pristine, setUploadFormSubmit } from './upload-form.js';
-import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick } from './edit-image.js';
+import { pristine, setUploadFormSubmit, formElement } from './upload-form.js';
+import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick, resetStyles } from './edit-image.js';
 
 // $======================== UPLOAD MODAL ========================$ //
 // $======================== UPLOAD MODAL ========================$ //
@@ -58,16 +58,17 @@ function closeUploadModal() {
   effectsListElement.removeEventListener('change', onEffectsListElementChange);
 
   //# сброс значения поля выбора файла
-  uploadImgInputElement.value = null;
+  formElement.reset();
 
   //# удаление сообщений-ошибок
   pristine.reset();
-}
 
+  //# сброс стилей
+  resetStyles();
+}
 
 //# загрузка фото
 uploadImgInputElement.addEventListener('change', onUploadImgInputElementChange);
-
 
 setUploadFormSubmit(closeUploadModal);
 

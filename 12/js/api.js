@@ -10,10 +10,8 @@ const ROUTE = {
 };
 
 //@ функция, получающая данные с сервера
-const getData = (
-  // onSuccess //? эта функция не работает, как ожидается по показанному в скринкасте
-) => {
-  const data = fetch(`${BASE_URL}${ROUTE.GET_DATA}`) //? если адрес неверный, то выводится ошибка в консоль, это норм?
+const getData = () => {
+  const data = fetch(`${BASE_URL}${ROUTE.GET_DATA}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`${response.status} - ${response.statusText}`);
@@ -21,21 +19,19 @@ const getData = (
       return response;
     })
     .then((response) => response.json())
-    // .then((dataPictures) => {
-    //   onSuccess(dataPictures);
-    // }) //? вот тут, возвращает undefined
     .catch(() => {
       showDataErrorMessage();
     });
   return data;
 };
 
-//# присвоение данных в переменную
-const pictures = await getData();
+//# присвоение данных в переменную + проверка на null илм undefined
+// если ошибка 404, то функция возвращает undefined и тогда в pictures записывается пустой массив - ошибки в render-thumbnails.js не будет
+const pictures = await getData() ?? [];
 
 //@ функция, отправляющая данные на сервер
 const sendData = (onSuccess, onFail, body) => {
-  fetch(`${BASE_URL}${ROUTE.SEND_DATA}`, //? если адрес неверный, то выводится ошибка в консоль, это норм?
+  fetch(`${BASE_URL}${ROUTE.SEND_DATA}`,
     {
       method: 'POST',
       body: body,
@@ -46,7 +42,7 @@ const sendData = (onSuccess, onFail, body) => {
         showSuccessMessage();
       } else {
         throw new Error(`${response.status} - ${response.statusText}`);
-      } //? если без блока else, то всегда идёт в catch, и появляется сообщение об ошибке
+      }
     })
     .catch(() => {
       onFail();
