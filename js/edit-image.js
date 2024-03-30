@@ -165,5 +165,11 @@ const onEffectsListElementChange = (evt) => {
 };
 // назначение обработчика в модуле upload-image.js
 
+//@ функция, сбрасывающая стили
+const resetStyles = () => {
+  imageElement.style = '';
+  effectLevelElement.style.display = 'none';
+};
+
 // &------------------------ EXPORT ------------------------& //
-export { scaleElement, onScaleElementClick, effectsListElement, onEffectsListElementChange };
+export { scaleElement, onScaleElementClick, effectsListElement, onEffectsListElementChange, resetStyles };

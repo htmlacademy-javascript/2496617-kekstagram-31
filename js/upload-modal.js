@@ -1,6 +1,6 @@
 import { isEscKey, checkInputsFocus } from './util.js';
 import { pristine, setUploadFormSubmit, formElement } from './upload-form.js';
-import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick } from './edit-image.js';
+import { effectsListElement, onEffectsListElementChange, scaleElement, onScaleElementClick, resetStyles } from './edit-image.js';
 
 // $======================== UPLOAD MODAL ========================$ //
 // $======================== UPLOAD MODAL ========================$ //
@@ -62,6 +62,9 @@ function closeUploadModal() {
 
   //# удаление сообщений-ошибок
   pristine.reset();
+
+  //# сброс стилей
+  resetStyles();
 }
 
 //# загрузка фото
