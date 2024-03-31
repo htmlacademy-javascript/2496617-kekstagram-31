@@ -1,4 +1,4 @@
-import { pictures } from './api.js';
+import { pictures } from './render-thumbnails.js';
 import { isEscKey } from './util.js';
 import { fillModal, showComments, matchShownCommentsNumber } from './fill-modal.js';
 

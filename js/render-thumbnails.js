@@ -1,9 +1,12 @@
-import { pictures } from './api.js';
+import { getData } from './api.js';
 import { clearContainer } from './util.js';
 import { showFiltersElement } from './filter.js';
 
 // $======================== RENDER THUMBNAILS ========================$ //
 // $======================== RENDER THUMBNAILS ========================$ //
+
+//# присвоение данных в переменную
+const pictures = await getData();
 
 //# шаблон миниатюры
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -43,4 +46,4 @@ if (pictures) {
 }
 
 // &------------------------ EXPORT ------------------------& //
-export { renderThumbnails };
+export { renderThumbnails, pictures };

@@ -1,5 +1,4 @@
-import { renderThumbnails } from './render-thumbnails.js';
-import { pictures } from './api.js';
+import { renderThumbnails, pictures } from './render-thumbnails.js';
 import { shuffleArray, switchActiveItem, sortPicturesByCommentsAmount, debounce } from './util.js';
 
 // $------------------------ FILTER ------------------------$ //

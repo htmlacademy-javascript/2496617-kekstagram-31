@@ -25,9 +25,6 @@ const getData = () => {
   return data;
 };
 
-//# присвоение данных в переменную
-const pictures = await getData();
-
 //@ функция, отправляющая данные на сервер
 const sendData = (onSuccess, onFail, body) => {
   fetch(`${BASE_URL}${ROUTE.SEND_DATA}`,
@@ -49,4 +46,4 @@ const sendData = (onSuccess, onFail, body) => {
 };
 
 // &------------------------ EXPORT ------------------------& //
-export { pictures, sendData };
+export { getData, sendData };
