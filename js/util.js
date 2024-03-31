@@ -5,7 +5,15 @@
 const isEscKey = (evt) => evt.key === 'Escape';
 
 //@ функция, разбивающая по пробелу значение инпута на массив
-const splitInput = (input) => input.value.toLowerCase().split(' ');
+const splitInput = (input) => {
+  const splittedInput = input.value.toLowerCase().split(' ');
+  const trimmedItems = splittedInput.filter((item) => {
+    if (item !== ' ') {
+      return item;
+    }
+  });
+  return trimmedItems;
+};
 
 //@ функция, проверяющая, что есть инпуты в фокусе
 const checkInputsFocus = () => {
