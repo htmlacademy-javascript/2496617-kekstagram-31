@@ -57,7 +57,7 @@ function closeUploadModal() {
   //# настройка фильтров
   effectsListElement.removeEventListener('change', onEffectsListElementChange);
 
-  //# сброс значения поля выбора файла
+  //# сброс значений формы
   formElement.reset();
 
   //# удаление сообщений-ошибок

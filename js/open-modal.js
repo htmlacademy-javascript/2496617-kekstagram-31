@@ -23,10 +23,10 @@ const onDocumentKeydown = (evt) => {
 };
 
 //# обработчик нажатия на кнопку показа больше комментариев
-const onShowMoreCommentsButtonClick = function () {
+function onShowMoreCommentsButtonClick() {
   showComments();
   matchShownCommentsNumber(this);
-};
+}
 
 //@ функция, открывающая модальное окно
 function openModal() {

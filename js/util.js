@@ -16,11 +16,7 @@ const splitInput = (input) => {
 };
 
 //@ функция, проверяющая, что есть инпуты в фокусе
-const checkInputsFocus = () => {
-  if (document.activeElement.classList.contains('text__hashtags') || document.activeElement.tagName === 'TEXTAREA') {
-    return true;
-  }
-};
+const checkInputsFocus = () => document.activeElement.classList.contains('text__hashtags') || document.activeElement.tagName === 'TEXTAREA';
 
 //@ функция, "устраняющая дребезг"
 const debounce = (callback, timeoutDelay) => {
@@ -38,14 +34,6 @@ const shuffleArray = (array, amount) => array.slice().sort(() => Math.random() -
 //@ функция, возвращающая массив картинок, отсортированный по убыванию количества комментариев
 const sortPicturesByCommentsAmount = (array) => array.slice().sort((a, b) => b.comments.length - a.comments.length);
 
-//@ функция, очищающая контейнер
-const clearContainer = (container, elementClass) => {
-  const elements = container.querySelectorAll(`.${elementClass}`);
-  elements.forEach((element) => {
-    element.remove();
-  });
-};
-
 //@ функция, переключающая активные элементы (фильтры)
 const switchActiveItem = (container, selectedItem, activeClass) => {
   const active = container.querySelector(`.${activeClass}`);
@@ -56,4 +44,6 @@ const switchActiveItem = (container, selectedItem, activeClass) => {
 };
 
 // &------------------------ EXPORT ------------------------& //
-export { isEscKey, splitInput, checkInputsFocus, debounce, shuffleArray, clearContainer, switchActiveItem, sortPicturesByCommentsAmount };
+export {
+  isEscKey, splitInput, checkInputsFocus, debounce, shuffleArray, switchActiveItem, sortPicturesByCommentsAmount
+};
