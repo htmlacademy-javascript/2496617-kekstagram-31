@@ -6,13 +6,25 @@ import { showErrorMessage } from './success-and-error-messages.js';
 // $======================== UPLOAD FORM ========================$ //
 
 const HASHTAGS_MAX_AMOUNT = 5;
-const HASHTAG_INVALID_FORMAT_MESSAGE = 'хэштег должен начинаться с символа # и быть не более 20 символов';
-const HASHTAGS_INVALID_AMOUNT_MESSAGE = 'количество хэштегов должно быть не более 5';
-const HASHTAGS_DUPLICATES_MESSAGE = 'хэштеги не должны повторяться';
-const COMMENT_INVALID_LENGTH_MESSAGE = 'комментарий должен быть не более 140 символов';
+// const HASHTAG_INVALID_FORMAT_MESSAGE = 'хэштег должен начинаться с символа # и быть не более 20 символов';
+// const HASHTAGS_INVALID_AMOUNT_MESSAGE = 'количество хэштегов должно быть не более 5';
+// const HASHTAGS_DUPLICATES_MESSAGE = 'хэштеги не должны повторяться';
+// const COMMENT_INVALID_LENGTH_MESSAGE = 'комментарий должен быть не более 140 символов';
 
-const SUBMIT_BUTTON_SENDING_TEXT = 'Отправляю...';
-const SUBMIT_BUTTON_DEFAULT_TEXT = 'Опубликовать';
+const InvalidMessage = {
+  HASHTAG_FORMAT: 'хэштег должен начинаться с символа # и быть не более 20 символов',
+  HASHTAG_AMOUNT: 'количество хэштегов должно быть не более 5',
+  HASHTAG_DUPLICATES: 'хэштеги не должны повторяться',
+  COMMENT_LENGTH: 'комментарий должен быть не более 140 символов',
+};
+
+// const SUBMIT_BUTTON_SENDING_TEXT = 'Отправляю...';
+// const SUBMIT_BUTTON_DEFAULT_TEXT = 'Опубликовать';
+
+const SubmitButtonText = {
+  DEFAULT: 'Опубликовать',
+  SENDING: 'Отправляю...',
+};
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
@@ -57,20 +69,20 @@ const validateHashtagsDuplicates = () =>
 pristine.addValidator(
   hashtagInputElement,
   validateHashtagsFormat,
-  HASHTAG_INVALID_FORMAT_MESSAGE
+  InvalidMessage.HASHTAG_FORMAT
 );
 
 //# валидация количества хэштегов
 pristine.addValidator(
   hashtagInputElement,
   validateHashtagsAmount,
-  HASHTAGS_INVALID_AMOUNT_MESSAGE
+  InvalidMessage.HASHTAG_AMOUNT
 );
 //# валидация повтора хэштегов
 pristine.addValidator(
   hashtagInputElement,
   validateHashtagsDuplicates,
-  HASHTAGS_DUPLICATES_MESSAGE
+  InvalidMessage.HASHTAG_DUPLICATES
 );
 
 
@@ -89,19 +101,19 @@ const validateCommentInput = () => {
 pristine.addValidator(
   commentInputElement,
   validateCommentInput,
-  COMMENT_INVALID_LENGTH_MESSAGE
+  InvalidMessage.COMMENT_LENGTH
 );
 
 // $------------------------ блокировка кнопки "отправить" ------------------------$ //
 const submitButton = formElement.querySelector('.img-upload__submit');
 const blockSubmitButton = () => {
   submitButton.disabled = true;
-  submitButton.textContent = SUBMIT_BUTTON_SENDING_TEXT;
+  submitButton.textContent = SubmitButtonText.SENDING;
 };
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = SUBMIT_BUTTON_DEFAULT_TEXT;
+  submitButton.textContent = SubmitButtonText.DEFAULT;
 };
 
 // $------------------------ загрузка фотографии ------------------------$ //
