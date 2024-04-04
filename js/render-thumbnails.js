@@ -1,22 +1,24 @@
-import { pictures } from './api.js';
-import { clearContainer } from './util.js';
+import { getData } from './api.js';
 import { showFiltersElement } from './filter.js';
 
 // $======================== RENDER THUMBNAILS ========================$ //
 // $======================== RENDER THUMBNAILS ========================$ //
 
-//# шаблон миниатюры
+/// присвоение данных в переменную
+const pictures = await getData();
+
+/// шаблон миниатюры
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-//# список-сетка миниатюр
+/// список-сетка миниатюр
 const thumbnailsListElement = document.querySelector('.pictures');
 
 //@ функция, отрисовывающая миниатюры
 const renderThumbnails = (picturesObjects) => {
-  //# фрагмент
+  /// фрагмент
   const thumbnailsListFragment = document.createDocumentFragment();
 
-  //# присвоение данных в шаблон миниатюр
+  /// присвоение данных в шаблон миниатюр
   picturesObjects.forEach(
     ({ id, url, description, likes, comments }) => {
       const thumbnailElement = pictureTemplate.cloneNode(true);
@@ -25,7 +27,7 @@ const renderThumbnails = (picturesObjects) => {
       thumbnailElement.querySelector('.picture__likes').textContent = likes;
       thumbnailElement.querySelector('.picture__comments').textContent = comments.length;
 
-      //# присвоение миниатюре идентификатора, соответствующего идентификатора
+      /// присвоение миниатюре идентификатора, соответствующего идентификатора
       thumbnailElement.setAttribute('id', id);
 
       thumbnailsListFragment.innerHTML = '';
@@ -33,8 +35,15 @@ const renderThumbnails = (picturesObjects) => {
     }
   );
 
-  clearContainer(thumbnailsListElement, 'picture');
+  /// очистка списка-сетки миниатюр
+  thumbnailsListElement.querySelectorAll('.picture').forEach((picture) => {
+    picture.remove();
+  });
+
+  /// заполнение списка-сетки миниатюр
   thumbnailsListElement.append(thumbnailsListFragment);
+
+  /// показ блока фильтрации
   showFiltersElement();
 };
 
@@ -43,4 +52,4 @@ if (pictures) {
 }
 
 // &------------------------ EXPORT ------------------------& //
-export { renderThumbnails };
+export { renderThumbnails, pictures };

@@ -3,9 +3,15 @@ import { isEscKey } from './util.js';
 // $======================== SUCCESS AND ERROR MESSAGES ========================$ //
 // $======================== SUCCESS AND ERROR MESSAGES ========================$ //
 
-const DATA_ERROR_MESSAGE_CLASS = 'data-error';
-const SUCCESS_MESSAGE_CLASS = 'success';
-const ERROR_MESSAGE_CLASS = 'error';
+// const DATA_ERROR_MESSAGE_CLASS = 'data-error';
+// const SUCCESS_MESSAGE_CLASS = 'success';
+// const ERROR_MESSAGE_CLASS = 'error';
+
+const AlertClass = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+  DATA_ERROR: 'data-error',
+};
 
 const ERROR_MESSAGE_SHOW_TIME = 5000;
 
@@ -50,15 +56,15 @@ const createMessage = (name) => {
 
 //@ функция, показывающая сообщение об успешной отправке
 const showSuccessMessage = () => {
-  document.body.append(createMessage(SUCCESS_MESSAGE_CLASS));
+  document.body.append(createMessage(AlertClass.SUCCESS));
 };
 //@ функция, показывающая сообщение об ошибке отправки
 const showErrorMessage = () => {
-  document.body.append(createMessage(ERROR_MESSAGE_CLASS));
+  document.body.append(createMessage(AlertClass.ERROR));
 };
 //@ функция, показывающая сообщение об ошибке получения данных
 const showDataErrorMessage = () => {
-  const dataErrorMessage = createMessage(DATA_ERROR_MESSAGE_CLASS);
+  const dataErrorMessage = createMessage(AlertClass.DATA_ERROR);
   document.body.append(dataErrorMessage);
   setTimeout(() => {
     dataErrorMessage.remove();

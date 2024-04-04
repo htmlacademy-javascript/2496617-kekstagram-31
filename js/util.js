@@ -1,41 +1,22 @@
-//@ функция, генерирующая случайное число в диапазоне
-const getRandomPositiveInteger = (min, max) => {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-
-  return Math.floor(result);
-};
-
-//@ функция, выбирающая случайный элемент массива
-const getRandomElement = (arr) => arr[getRandomPositiveInteger(0, arr.length - 1)];
-
-//@ функция, создающая генераторы
-const createIdGenerator = () => {
-  let lastGeneratedId = 0;
-
-  return function () {
-    lastGeneratedId++;
-
-    return lastGeneratedId;
-  };
-};
-
-//@ функция-генератор идентификаторов
-const generateId = createIdGenerator();
+// $------------------------ UTILITIES ------------------------$ //
+// $------------------------ UTILITIES ------------------------$ //
 
 //@ функция, проверяющая, что нажатая клавиша - ESC
 const isEscKey = (evt) => evt.key === 'Escape';
 
 //@ функция, разбивающая по пробелу значение инпута на массив
-const splitInput = (input) => input.value.split(' ');
+const splitInput = (input) => {
+  const splittedInput = input.value.toLowerCase().split(' ');
+  const trimmedItems = splittedInput.filter((item) => {
+    if (item !== ' ') {
+      return item;
+    }
+  });
+  return trimmedItems;
+};
 
 //@ функция, проверяющая, что есть инпуты в фокусе
-const checkInputsFocus = () => {
-  if (document.activeElement.classList.contains('text__hashtags') || document.activeElement.tagName === 'TEXTAREA') {
-    return true;
-  }
-};
+const checkInputsFocus = () => document.activeElement.classList.contains('text__hashtags') || document.activeElement.tagName === 'TEXTAREA';
 
 //@ функция, "устраняющая дребезг"
 const debounce = (callback, timeoutDelay) => {
@@ -53,14 +34,6 @@ const shuffleArray = (array, amount) => array.slice().sort(() => Math.random() -
 //@ функция, возвращающая массив картинок, отсортированный по убыванию количества комментариев
 const sortPicturesByCommentsAmount = (array) => array.slice().sort((a, b) => b.comments.length - a.comments.length);
 
-//@ функция, очищающая контейнер
-const clearContainer = (container, elementClass) => {
-  const elements = container.querySelectorAll(`.${elementClass}`);
-  elements.forEach((element) => {
-    element.remove();
-  });
-};
-
 //@ функция, переключающая активные элементы (фильтры)
 const switchActiveItem = (container, selectedItem, activeClass) => {
   const active = container.querySelector(`.${activeClass}`);
@@ -71,4 +44,6 @@ const switchActiveItem = (container, selectedItem, activeClass) => {
 };
 
 // &------------------------ EXPORT ------------------------& //
-export { getRandomPositiveInteger, getRandomElement, generateId, isEscKey, splitInput, checkInputsFocus, debounce, shuffleArray, clearContainer, switchActiveItem, sortPicturesByCommentsAmount };
+export {
+  isEscKey, splitInput, checkInputsFocus, debounce, shuffleArray, switchActiveItem, sortPicturesByCommentsAmount
+};

@@ -1,4 +1,4 @@
-import { pictures } from './api.js';
+import { pictures } from './render-thumbnails.js';
 import { isEscKey } from './util.js';
 import { fillModal, showComments, matchShownCommentsNumber } from './fill-modal.js';
 
@@ -23,10 +23,10 @@ const onDocumentKeydown = (evt) => {
 };
 
 //# обработчик нажатия на кнопку показа больше комментариев
-const onShowMoreCommentsButtonClick = function () {
+function onShowMoreCommentsButtonClick() {
   showComments();
   matchShownCommentsNumber(this);
-};
+}
 
 //@ функция, открывающая модальное окно
 function openModal() {
