@@ -1,4 +1,6 @@
 import { pictures } from './api.js';
+import { clearContainer } from './util.js';
+import { showFiltersElement } from './filter.js';
 
 // $======================== RENDER THUMBNAILS ========================$ //
 // $======================== RENDER THUMBNAILS ========================$ //
@@ -26,11 +28,19 @@ const renderThumbnails = (picturesObjects) => {
       //# присвоение миниатюре идентификатора, соответствующего идентификатора
       thumbnailElement.setAttribute('id', id);
 
+      thumbnailsListFragment.innerHTML = '';
       thumbnailsListFragment.append(thumbnailElement);
     }
   );
 
+  clearContainer(thumbnailsListElement, 'picture');
   thumbnailsListElement.append(thumbnailsListFragment);
+  showFiltersElement();
 };
 
-renderThumbnails(pictures);
+if (pictures) {
+  renderThumbnails(pictures);
+}
+
+// &------------------------ EXPORT ------------------------& //
+export { renderThumbnails };

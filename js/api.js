@@ -25,9 +25,8 @@ const getData = () => {
   return data;
 };
 
-//# присвоение данных в переменную + проверка на null илм undefined
-// если ошибка 404, то функция возвращает undefined и тогда в pictures записывается пустой массив - ошибки в render-thumbnails.js не будет
-const pictures = await getData() ?? [];
+//# присвоение данных в переменную
+const pictures = await getData();
 
 //@ функция, отправляющая данные на сервер
 const sendData = (onSuccess, onFail, body) => {
