@@ -1,6 +1,6 @@
 import '../vendor/nouislider/nouislider.js';
 
-//# массив объектов-фильтров эффектов
+/// массив объектов-фильтров эффектов
 const FILTERS = [
   {
     id: 'effect-none',
@@ -66,7 +66,7 @@ const changeImageSize = () => {
   imageElement.style.transform = `scale(${scaleControlElement.value})`;
 };
 
-//# обработчик нажатия на кнопки +/-
+/// обработчик нажатия на кнопки +/-
 const onScaleElementClick = (evt) => {
   const scaleControlNumber = parseInt(scaleControlElement.value, PARSING_BASE);
 
@@ -94,7 +94,7 @@ const effectSliderElement = effectLevelElement.querySelector('.effect-level__sli
 const effectValueElement = document.querySelector('.effect-level__value');
 const effectsListElement = document.querySelector('.effects__list');
 
-//# инициализация слайдера
+/// инициализация слайдера
 noUiSlider.create(effectSliderElement, {
   start: 1,
   connect: 'lower',
@@ -106,7 +106,7 @@ noUiSlider.create(effectSliderElement, {
 });
 
 
-//# создание коллекции Map из массива объектов-эффектов, в которой элементы - это массивы пар [id - (сам)объект]
+/// Map из массива объектов-эффектов, в которой элементы - это массивы пар [id - (сам)объект]
 const filterEffectsMap = FILTERS.reduce((map, filterEffectObject) => {
   map.set(filterEffectObject.id, filterEffectObject);
   return map;
@@ -155,7 +155,7 @@ const adjustEffect = (filterValue, minValue = 0, maxValue = 1, stepValue = 0.1, 
   });
 };
 
-//# обработчик выбора эффекта
+/// обработчик выбора эффекта
 const onEffectsListElementChange = (evt) => {
   const checkedInput = evt.target;
   if (checkedInput.tagName === 'INPUT') {

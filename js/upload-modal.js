@@ -9,17 +9,17 @@ const uploadImgInputElement = document.querySelector('.img-upload__input');
 const uploadModalElement = document.querySelector('.img-upload__overlay');
 const closeButton = uploadModalElement.querySelector('.img-upload__cancel');
 
-// # обработчик нажатия на кнопку 'Загрузить фото' - открывает модальное окно с формой
+/// обработчик нажатия на кнопку 'Загрузить фото' - открывает модальное окно с формой
 const onUploadImgInputElementChange = () => {
   openUploadModal();
 };
 
-// # обработчик нажатия на крестик - закрывает модальное окно с формой
+/// обработчик нажатия на крестик - закрывает модальное окно с формой
 const onCloseButtonClick = () => {
   closeUploadModal();
 };
 
-//# обработчик нажатия на кнопку ESC - закрывает модальное окно с формой
+/// обработчик нажатия на кнопку ESC - закрывает модальное окно с формой
 const onDocumentKeydown = (evt) => {
   if (isEscKey(evt) && !checkInputsFocus() && !document.querySelector('.error')) {
     closeUploadModal();
@@ -35,10 +35,10 @@ function openUploadModal() {
 
   document.body.classList.add('modal-open');
 
-  //# настройка размера картинки
+  /// настройка размера картинки
   scaleElement.addEventListener('click', onScaleElementClick);
 
-  //# настройка фильтров
+  /// настройка фильтров
   effectsListElement.addEventListener('change', onEffectsListElementChange);
 }
 
@@ -51,23 +51,23 @@ function closeUploadModal() {
 
   document.body.classList.remove('modal-open');
 
-  //# настройка размера картинки
+  /// настройка размера картинки
   scaleElement.removeEventListener('click', onScaleElementClick);
 
-  //# настройка фильтров
+  /// настройка фильтров
   effectsListElement.removeEventListener('change', onEffectsListElementChange);
 
-  //# сброс значений формы
+  /// сброс значений формы
   formElement.reset();
 
-  //# удаление сообщений-ошибок
+  /// удаление сообщений-ошибок
   pristine.reset();
 
-  //# сброс стилей
+  /// сброс стилей
   resetStyles();
 }
 
-//# загрузка фото
+/// загрузка фото
 uploadImgInputElement.addEventListener('change', onUploadImgInputElementChange);
 
 setUploadFormSubmit(closeUploadModal);
