@@ -10,19 +10,19 @@ const modalElement = document.querySelector('.big-picture');
 const closeButtonElement = modalElement.querySelector('.big-picture__cancel');
 const showMoreCommentsButton = modalElement.querySelector('.social__comments-loader');
 
-//# обработчик закрывает модальное окно при клике на крестик
+/// обработчик закрывает модальное окно при клике на крестик
 const onCloseButtonElementClick = () => {
   closeModal();
 };
 
-//# обработчик закрывает модальное окно при нажатии на ESC
+/// обработчик закрывает модальное окно при нажатии на ESC
 const onDocumentKeydown = (evt) => {
   if (isEscKey(evt)) {
     closeModal();
   }
 };
 
-//# обработчик нажатия на кнопку показа больше комментариев
+/// обработчик нажатия на кнопку показа больше комментариев
 function onShowMoreCommentsButtonClick() {
   showComments();
   matchShownCommentsNumber(this);
@@ -52,7 +52,7 @@ function closeModal() {
   showMoreCommentsButton.removeEventListener('click', onShowMoreCommentsButtonClick);
 }
 
-//# обработчик открывает модальное окно при клике на контейнер с картинками
+/// обработчик открывает модальное окно при клике на контейнер с картинками
 const onThumbnailsContainerElementClick = (evt) => {
   const clickedPicture = evt.target.closest('.picture');
 

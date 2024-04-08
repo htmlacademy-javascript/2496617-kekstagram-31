@@ -6,10 +6,6 @@ import { showErrorMessage } from './success-and-error-messages.js';
 // $======================== UPLOAD FORM ========================$ //
 
 const HASHTAGS_MAX_AMOUNT = 5;
-// const HASHTAG_INVALID_FORMAT_MESSAGE = 'хэштег должен начинаться с символа # и быть не более 20 символов';
-// const HASHTAGS_INVALID_AMOUNT_MESSAGE = 'количество хэштегов должно быть не более 5';
-// const HASHTAGS_DUPLICATES_MESSAGE = 'хэштеги не должны повторяться';
-// const COMMENT_INVALID_LENGTH_MESSAGE = 'комментарий должен быть не более 140 символов';
 
 const InvalidMessage = {
   HASHTAG_FORMAT: 'хэштег должен начинаться с символа # и быть не более 20 символов',
@@ -17,9 +13,6 @@ const InvalidMessage = {
   HASHTAG_DUPLICATES: 'хэштеги не должны повторяться',
   COMMENT_LENGTH: 'комментарий должен быть не более 140 символов',
 };
-
-// const SUBMIT_BUTTON_SENDING_TEXT = 'Отправляю...';
-// const SUBMIT_BUTTON_DEFAULT_TEXT = 'Опубликовать';
 
 const SubmitButtonText = {
   DEFAULT: 'Опубликовать',
@@ -65,20 +58,20 @@ const validateHashtagsDuplicates = () =>
   new Set(splitInput(hashtagInputElement)).size === splitInput(hashtagInputElement).length;
 
 
-//# валидация формата хэштегов
+/// валидация формата хэштегов
 pristine.addValidator(
   hashtagInputElement,
   validateHashtagsFormat,
   InvalidMessage.HASHTAG_FORMAT
 );
 
-//# валидация количества хэштегов
+/// валидация количества хэштегов
 pristine.addValidator(
   hashtagInputElement,
   validateHashtagsAmount,
   InvalidMessage.HASHTAG_AMOUNT
 );
-//# валидация повтора хэштегов
+/// валидация повтора хэштегов
 pristine.addValidator(
   hashtagInputElement,
   validateHashtagsDuplicates,
@@ -97,7 +90,7 @@ const validateCommentInput = () => {
   return false;
 };
 
-//# валидация инпута комментария
+/// валидация инпута комментария
 pristine.addValidator(
   commentInputElement,
   validateCommentInput,
