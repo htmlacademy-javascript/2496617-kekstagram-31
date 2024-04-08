@@ -3,10 +3,6 @@ import { isEscKey } from './util.js';
 // $======================== SUCCESS AND ERROR MESSAGES ========================$ //
 // $======================== SUCCESS AND ERROR MESSAGES ========================$ //
 
-// const DATA_ERROR_MESSAGE_CLASS = 'data-error';
-// const SUCCESS_MESSAGE_CLASS = 'success';
-// const ERROR_MESSAGE_CLASS = 'error';
-
 const AlertClass = {
   SUCCESS: 'success',
   ERROR: 'error',
@@ -21,7 +17,7 @@ const createMessage = (name) => {
   const messageElement = messageTemplate.cloneNode(true);
   const closeMessageButton = messageElement.querySelector('button');
 
-  //# обработчик нажатия на ESC
+  /// обработчик нажатия на ESC
   const onDocumentKeydown = (evt) => {
     if (isEscKey(evt)) {
       messageElement.remove();
@@ -30,13 +26,13 @@ const createMessage = (name) => {
   };
   document.addEventListener('keydown', onDocumentKeydown);
 
-  //# обработчик нажатия на кнопку закрытия
+  /// обработчик нажатия на кнопку закрытия
   const onCloseMessageButtonClick = () => {
     messageElement.remove();
     document.removeEventListener('keydown', onDocumentKeydown);
   };
 
-  //# обработчик нажатия на оверлэй сообщения за пределами блока с сообщением
+  /// обработчик нажатия на оверлэй сообщения за пределами блока с сообщением
   const onOverlayMessageClick = (evt) => {
     if (evt.target === messageElement) {
       messageElement.remove();
